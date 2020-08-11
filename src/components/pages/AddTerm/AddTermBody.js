@@ -53,6 +53,8 @@ export default class AddTermBody extends Component {
     };
   }
 
+  addTermData = (e) => {};
+
   onSaveModalClick = (e) => {
     const section = document.getElementById("radioSuccess2");
     const newCourse = {
@@ -115,10 +117,12 @@ export default class AddTermBody extends Component {
 
   onGroupClick = () => {
     document.getElementById("additional-data").style.display = "none";
+    document.getElementById("group-data").style.display = "block";
   };
 
   onSectionClick = () => {
     document.getElementById("additional-data").style.display = "block";
+    document.getElementById("group-data").style.display = "none";
   };
 
   onSectionNumberChange = (e) => {
@@ -134,8 +138,16 @@ export default class AddTermBody extends Component {
         group.innerHTML = `
           <div key=${i}>
             <label class="text-primary" style="display:block">
-              Group ${i} date:
+              Group ${i}:
             </label>
+            <label class="text-secondary" style="marginRight:10px">
+              Demonstrator name:
+            </label>
+            <input
+              id="demonstrator${i}"
+              type="text"
+              style="margin-right:20px; border:1px solid #999; border-radius:6px;"
+            ></input>
             <label class="text-secondary" style="marginRight:10px">
               day:
             </label>
@@ -143,7 +155,7 @@ export default class AddTermBody extends Component {
               defaultValue="1"
               id="select${i}"
               class="font-weight-bold font-italic"
-              style="margin-right:30px; border:1px solid #999; border-radius:6px;"
+              style="margin-right:20px; border:1px solid #999; border-radius:6px;"
             >
               <option value="1">Saturday</option>
               <option value="2">Sunday</option>
@@ -434,6 +446,21 @@ export default class AddTermBody extends Component {
                 </Card>
               </div>
 
+              {/*submit term data */}
+              <div className="col-sm-12">
+                <form className="form">
+                  <div className="form-group">
+                    <button
+                      style={{width:'100%', height:'50px'}}
+                      onClick={this.addTermData}
+                      className="btn btn-success"
+                    >
+                      Submit data
+                    </button>
+                  </div>
+                </form>
+              </div>
+
               {/* Modal for course information */}
               <div className="modal fade" id="modal-lg">
                 <div className="modal-dialog modal-lg">
@@ -455,17 +482,14 @@ export default class AddTermBody extends Component {
                     <div className="modal-body">
                       <form id="modal-form">
                         <div className="form-group">
-                          <label
-                            className="text-primary"
-                            htmlFor="demonstatorName"
-                          >
-                            Demonstrator name:
+                          <label className="text-primary" htmlFor="doctorName">
+                            Doctor name:
                           </label>
                           <input
                             type="text"
                             className="form-control"
-                            id="demonstatorName"
-                            placeholder="Enter demonstator name ..."
+                            id="doctorName"
+                            placeholder="Enter doctor name ..."
                           />
                         </div>
                         {/* radio */}
@@ -509,6 +533,66 @@ export default class AddTermBody extends Component {
                             </label>
                           </div>
                         </div>
+
+                        <div className="form-group" id="group-data">
+                          <div>
+                            <label
+                              class="text-secondary"
+                              style={{ marginRight: "10px" }}
+                            >
+                              Demonstrator name:
+                            </label>
+                            <input
+                              id="groupDemonstrator"
+                              type="text"
+                              style={{
+                                marginRight: "20px",
+                                border: "1px solid #999",
+                                borderRadius: "6px",
+                              }}
+                            ></input>
+                            <label
+                              class="text-secondary"
+                              style={{ marginRight: "10px" }}
+                            >
+                              day:
+                            </label>
+                            <select
+                              defaultValue="1"
+                              id="groupSelect"
+                              class="font-weight-bold font-italic"
+                              style={{
+                                marginRight: "20px",
+                                border: "1px solid #999",
+                                borderRadius: "6px",
+                              }}
+                            >
+                              <option value="1">Saturday</option>
+                              <option value="2">Sunday</option>
+                              <option value="3">Monday</option>
+                              <option value="4">Tuesday</option>
+                              <option value="5">Wednesday</option>
+                              <option value="6">Thursday</option>
+                              <option value="7">Friday</option>
+                            </select>
+                            <label
+                              class="text-secondary"
+                              style={{ marginRight: "10px" }}
+                            >
+                              time:
+                            </label>
+                            <input
+                              id="groupTime"
+                              style={{
+                                border: "1px solid #999",
+                                borderRadius: "6px",
+                              }}
+                              type="time"
+                            ></input>
+                          </div>
+                        </div>
+
+                        {/*section groups data if found*/}
                         <div
                           className="form-group"
                           id="additional-data"
@@ -523,6 +607,7 @@ export default class AddTermBody extends Component {
                             </label>
                             <input
                               type="number"
+                              defaultValue={0}
                               className="form-control"
                               id="numberOfSectionGroups"
                               placeholder="Enter number of section groups ..."

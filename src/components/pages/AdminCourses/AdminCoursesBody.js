@@ -1,142 +1,96 @@
 import React, { Component } from "react";
 import { NavLink } from "react-router-dom";
+import axios from "axios";
+import { serverURL } from "../../../staticData";
+import userService from "../../../services/user.service";
+import Pagination from "react-js-pagination";
 
 export default class AdminCourses extends Component {
   constructor(props) {
     super(props);
     this.state = {
       courses: [],
+      subCourses: [],
       programs: [],
+      subPrograms: [],
+      activePage: 1,
+      programActivePage: 1,
     };
   }
 
-  async componentDidMount() {
-    let response = await fetch("http://localhost:8080/api/courses", {});
-    if (response) {
-      const data = await response.json();
-      this.setState({ courses: data._embedded.courses });
-    }
-
-    response = await fetch("http://localhost:8080/api/programs", {});
-    if (response) {
-      const data = await response.json();
-      this.setState({ programs: data._embedded.programs });
-    }
-
-    let finalIdx = this.state.courses.length - 1;
-    let newCourses = [];
-    this.state.courses.forEach((course, idx) => {
-      fetch(course._links.program.href, {})
-        .then((response) => {
-          return response.json();
-        })
-        .then((data) => {
-          newCourses.push({
-            ...course,
-            programName: data.nameEnglish,
-          });
-
-          if (idx == finalIdx) {
-            this.setState(() => ({ courses: newCourses }));
-          }
-        })
-        .catch((error) => {
-          newCourses.push({
-            ...course,
-            programName: "",
-          });
-
-          if (idx == finalIdx) {
-            this.setState(() => ({ courses: newCourses }));
-          }
+  componentDidMount() {
+    userService.getData('courses').then(
+      (response) => {
+        const coursesData = response.data.courses;
+        this.setState({
+          courses: coursesData,
         });
-    });
 
-    newCourses = [];
-    this.state.courses.forEach((course, idx) => {
-      fetch(course._links.preCourse.href, {})
-        .then((response) => {
-          return response.json();
-        })
-        .then((data) => {
-          newCourses.push({
-            ...course,
-            preCourseName: data.nameEnglish,
-          });
-
-          if (idx == finalIdx) {
-            this.setState(() => ({ courses: newCourses }));
-          }
-        })
-        .catch((error) => {
-          newCourses.push({
-            ...course,
-            preCourseName: "",
-          });
-
-          if (idx == finalIdx) {
-            this.setState(() => ({ courses: newCourses }));
-          }
+        const newSubCourses = coursesData.slice(
+          0,
+          Math.min(coursesData.length, 5)
+        );
+        this.setState({
+          subCourses: newSubCourses,
         });
-    });
-
-    newCourses = [];
-    this.state.courses.forEach((course, idx) => {
-      fetch(course._links.departments.href, {})
-        .then((response) => {
-          return response.json();
-        })
-        .then((data) => {
-          newCourses.push({
-            ...course,
-            departmentsName: data.nameEnglish,
-          });
-
-          if (idx == finalIdx) {
-            this.setState(() => ({ courses: newCourses }));
-          }
-        })
-        .catch((error) => {
-          newCourses.push({
-            ...course,
-            departmentsName: "",
-          });
-
-          if (idx == finalIdx) {
-            this.setState(() => ({ courses: newCourses }));
-          }
+      },
+      (error) => {
+        this.setState({
+          courses: [],
         });
-    });
+      }
+    );
 
-    finalIdx = this.state.programs.length - 1;
-    let newPrograms = [];
-    this.state.programs.forEach((program, idx) => {
-      fetch(program._links.underRequirement.href, {})
-        .then((response) => {
-          return response.json();
-        })
-        .then((data) => {
-          newPrograms.push({
-            ...program,
-            underRequirement: data.nameEnglish,
-          });
-
-          if (idx == finalIdx) {
-            this.setState(() => ({ programs: newPrograms }));
-          }
-        })
-        .catch((error) => {
-          newPrograms.push({
-            ...program,
-            underRequirement: "",
-          });
-
-          if (idx == finalIdx) {
-            this.setState(() => ({ programs: newPrograms }));
-          }
+    userService.getData('programs').then(
+      (response) => {
+        const programsData = response.data.programs;
+        this.setState({
+          programs: programsData,
         });
-    });
+
+        const newSubPrograms = programsData.slice(
+          0,
+          Math.min(programsData.length, 5)
+        );
+        this.setState({
+          subPrograms: newSubPrograms,
+        });
+      },
+      (error) => {
+        this.setState({
+          programs: [],
+        });
+      }
+    );
   }
+
+  handlePageChange = (pageNumber) => {
+    this.setState({ activePage: pageNumber });
+    const start = (pageNumber - 1) * 5;
+    const len = this.state.courses.length;
+
+    const newSubCourses = this.state.courses.slice(
+      start,
+      Math.min(len, start + 5)
+    );
+    this.setState({
+      subCourses: newSubCourses,
+    });
+  };
+
+  handleProgramPageChange = (pageNumber) => {
+    this.setState({ programActivePage: pageNumber });
+    const start = (pageNumber - 1) * 5;
+    const len = this.state.programs.length;
+
+    const newSubPrograms = this.state.programs.slice(
+      start,
+      Math.min(len, start + 5)
+    );
+    this.setState({
+      subPrograms: newSubPrograms,
+    });
+  };
 
   render() {
     return (
@@ -195,9 +149,9 @@ export default class AdminCourses extends Component {
                         </tr>
                       </thead>
                       <tbody>
-                        {this.state.programs.map((program, idx) => (
-                          <tr key={program.nameEnglish}>
-                            <td>{idx +1}</td>
+                        {this.state.subPrograms.map((program) => (
+                          <tr key={program.id}>
+                            <th scope='col'>{program.id}</th>
                             <td>{program.nameArabic}</td>
                             <td>{program.hours}</td>
                             <td>{program.underRequirement}</td>
@@ -226,31 +180,15 @@ export default class AdminCourses extends Component {
                   {/* /.card-body */}
                   <div className="card-footer clearfix">
                     <ul className="pagination pagination-sm m-0 float-right">
-                      <li className="page-item">
-                        <a className="page-link" href="#">
-                          «
-                        </a>
-                      </li>
-                      <li className="page-item">
-                        <a className="page-link" href="#">
-                          1
-                        </a>
-                      </li>
-                      <li className="page-item">
-                        <a className="page-link" href="#">
-                          2
-                        </a>
-                      </li>
-                      <li className="page-item">
-                        <a className="page-link" href="#">
-                          3
-                        </a>
-                      </li>
-                      <li className="page-item">
-                        <a className="page-link" href="#">
-                          »
-                        </a>
-                      </li>
+                      <Pagination
+                        activePage={this.state.programActivePage}
+                        itemsCountPerPage={5}
+                        totalItemsCount={this.state.programs.length}
+                        pageRangeDisplayed={5}
+                        onChange={this.handleProgramPageChange}
+                        itemClass="page-item"
+                        linkClass="page-link"
+                      />
                     </ul>
                   </div>{" "}
                 </div>{" "}
@@ -275,7 +213,7 @@ export default class AdminCourses extends Component {
                   </div>
                 </div>
                 <div className="col-md-12">
-                  <table className="table table-bordered">
+                  <table className="table table-striped">
                     <thead>
                       <tr>
                         <th>code</th>
@@ -286,22 +224,20 @@ export default class AdminCourses extends Component {
                         <th>Lab H</th>
                         <th>Program name</th>
                         <th>PreCourse Code</th>
-                        <th>Department</th>
                         <th>option</th>
                       </tr>
                     </thead>
                     <tbody>
-                      {this.state.courses.map((course) => (
-                        <tr key={course.nameEnglish}>
-                          <td>code</td>
+                      {this.state.subCourses.map((course) => (
+                        <tr key={course.code}>
+                          <th scope="col">{course.code}</th>
                           <td>{course.nameArabic}</td>
                           <td>{course.nameEnglish}</td>
                           <td>{course.hours}</td>
                           <td>{course.lecHours}</td>
                           <td>{course.labHours}</td>
-                          <td>{course.programName}</td>
-                          <td>{course.preCourseName}</td>
-                          <td>{course.departmentsName}</td>
+                          <td>{course.program}</td>
+                          <td>{course.preCourse}</td>
                           <td>
                             <div className="row- center  ">
                               <button
@@ -324,31 +260,15 @@ export default class AdminCourses extends Component {
                 {/* /.card-body */}
                 <div className="card-footer clearfix">
                   <ul className="pagination pagination-sm m-0 float-right">
-                    <li className="page-item">
-                      <a className="page-link" href="#">
-                        «
-                      </a>
-                    </li>
-                    <li className="page-item">
-                      <a className="page-link" href="#">
-                        1
-                      </a>
-                    </li>
-                    <li className="page-item">
-                      <a className="page-link" href="#">
-                        2
-                      </a>
-                    </li>
-                    <li className="page-item">
-                      <a className="page-link" href="#">
-                        3
-                      </a>
-                    </li>
-                    <li className="page-item">
-                      <a className="page-link" href="#">
-                        »
-                      </a>
-                    </li>
+                    <Pagination
+                      activePage={this.state.activePage}
+                      itemsCountPerPage={5}
+                      totalItemsCount={this.state.courses.length}
+                      pageRangeDisplayed={5}
+                      onChange={this.handlePageChange}
+                      itemClass="page-item"
+                      linkClass="page-link"
+                    />
                   </ul>
                 </div>{" "}
               </div>{" "}

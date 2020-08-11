@@ -1,6 +1,11 @@
 import React, { Component } from "react";
 import { NavLink } from "react-router-dom";
-import './Login.css'
+import AuthService from "../../../services/auth.service";
+import Form from "react-validation/build/form";
+import Input from "react-validation/build/input";
+import { isEmail } from "validator";
+import "./Login.css";
+
 
 export default class Page extends Component {
   constructor(props) {
@@ -8,7 +13,38 @@ export default class Page extends Component {
     this.state = {};
   }
 
+  onLogin = (e) => {
+    e.preventDefault();
+
+    const email = document.getElementById("login-email").value;
+    const pass = document.getElementById("login-password").value;
+    const message = document.getElementById("error-message");
+
+    if (email === "" || pass === "") {
+      message.innerHTML = "Please Enter your email and password";
+    } else {
+      /*if (!isEmail(email)) {
+        message.innerHTML = "enter a valid email";
+      } else {*/
+      const userData = AuthService.login(email, pass);
+      
+      Promise.resolve(userData).then((value) => {
+        if(!value) {
+          message.innerHTML = "your email or password might be wrong";
+        }else if (value && value.accessToken) {
+          this.props.history.push("/");
+          window.location.reload();
+        }
+      });
+      //}
+    }
+  };
+
   render() {
+    if(AuthService.getRole()){
+      this.props.history.push('/');
+    }
+
     return (
       <div className="login-page">
         <div className="login-box">
@@ -22,10 +58,11 @@ export default class Page extends Component {
           <div className="card">
             <div className="card-body login-card-body">
               <p className="login-box-msg">Sign in to start your session</p>
-              <form action="../../index3.html" method="post">
+              <form action="../../index3.html" onSubmit={this.onLogin}>
                 <div className="input-group mb-3">
                   <input
-                    type="email"
+                    id="login-email"
+                    type="text"
                     className="form-control"
                     placeholder="Email"
                   />
@@ -37,6 +74,7 @@ export default class Page extends Component {
                 </div>
                 <div className="input-group mb-3">
                   <input
+                    id="login-password"
                     type="password"
                     className="form-control"
                     placeholder="Password"
@@ -56,13 +94,17 @@ export default class Page extends Component {
                   </div>
                   {/* /.col */}
                   <div className="col-4">
-                    <button type="submit" className="btn btn-primary btn-block">
+                    <button
+                      type="submit"
+                      className="btn btn-primary btn-block"
+                    >
                       Sign In
                     </button>
                   </div>
                   {/* /.col */}
                 </div>
               </form>
+              <div id="error-message" style={{ color: "red" }}></div>
               <p className="mb-1">
                 <a href="/forget-password">I forgot my password</a>
               </p>

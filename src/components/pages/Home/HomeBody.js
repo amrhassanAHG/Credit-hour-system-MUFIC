@@ -6,11 +6,9 @@ import { NavLink } from 'react-router-dom';
 export default class HomeBody extends Component {
     constructor(props) {
         super(props);
-        this.state = {
-
-        }
+        this.state = {}
     }
-    
+
     render() {
         return (
             <div className="content-wrapper">
