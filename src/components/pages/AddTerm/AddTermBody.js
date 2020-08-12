@@ -12,6 +12,7 @@ export default class AddTermBody extends Component {
     this.state = {
       termEnglishName: "",
       termArabicName: "",
+      termType: "regular",
 
       termStartDate: moment(),
       termEndDate: moment(),
@@ -208,11 +209,6 @@ export default class AddTermBody extends Component {
               {/* /.col */}
               <div className="col-sm-6">
                 <ol className="breadcrumb float-sm-right">
-                  <li className="breadcrumb-item ">
-                    <NavLink to="/" exact={true}>
-                      Home
-                    </NavLink>
-                  </li>
                   <li className="breadcrumb-item">
                     <NavLink to="/terms">Terms</NavLink>
                   </li>
@@ -266,6 +262,46 @@ export default class AddTermBody extends Component {
                           value={this.state.termArabicName}
                           onChange={this.onArabicNameChange}
                         />
+                      </div>
+
+                      <div className="form-group clearfix">
+                        <label style={{ display: "block" }}>Term type:</label>
+                        <div
+                          className="icheck-success d-inline"
+                          style={{ marginRight: "5px" }}
+                        >
+                          <input
+                            onClick={() => {
+                              this.setState({ termType: "regular" });
+                            }}
+                            type="radio"
+                            id="regularTerm"
+                            name="r1"
+                            defaultChecked
+                          />
+                          <label
+                            className="text-secondary"
+                            htmlFor="regularTerm"
+                          >
+                            Regular term
+                          </label>
+                        </div>
+                        <div className="icheck-success d-inline">
+                          <input
+                            onClick={() => {
+                              this.setState({ termType: "regular" });
+                            }}
+                            type="radio"
+                            id="summerTerm"
+                            name="r1"
+                          />
+                          <label
+                            className="text-secondary"
+                            htmlFor="summerTerm"
+                          >
+                            Summer term
+                          </label>
+                        </div>
                       </div>
 
                       <div className="form-group">
@@ -451,7 +487,7 @@ export default class AddTermBody extends Component {
                 <form className="form">
                   <div className="form-group">
                     <button
-                      style={{width:'100%', height:'50px'}}
+                      style={{ width: "100%", height: "50px" }}
                       onClick={this.addTermData}
                       className="btn btn-success"
                     >

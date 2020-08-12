@@ -25,7 +25,7 @@ export default class ProtectedRoute extends Component {
           ) {
             return <Component {...props} />;
           } else {
-            return <Redirect to="/" />;
+            return <Redirect to="/write-post" />;
           }
         }}
       />

@@ -82,11 +82,6 @@ export default class AddProgramManuallyBody extends Component {
               {/* /.col */}
               <div className="col-sm-6">
                 <ol className="breadcrumb float-sm-right">
-                  <li className="breadcrumb-item ">
-                    <NavLink to="/" exact={true}>
-                      Home
-                    </NavLink>
-                  </li>
                   <li className="breadcrumb-item">
                     <NavLink to="/admin-courses">
                       Courses

@@ -12,7 +12,7 @@ import CoursesInfo from "../components/pages/CoursesInfo/CoursesInfo";
 import Result from "../components/pages/Result/Result";
 import Excuse from "../components/pages/Excuse/Excuse";
 import Department from "../components/pages/Department/Department";
-import StudentMarks from "../components/pages/StudentMarks/StudentMarks";
+import Profile from "../components/pages/Profile/Profile";
 import EditMaterial from "../components/pages/EditMaterial/EditMaterial";
 import UploadMaterials from "../components/pages/UploadMaterials/UploadMaterials";
 import WritePost from "../components/pages/WritePost/WritePost";
@@ -23,7 +23,6 @@ import AdminCourses from "../components/pages/AdminCourses/AdminCourses";
 import CoursesRegistered from "../components/pages/CoursesRegistered/CoursesRegistered";
 import AddStudentSheet from "../components/pages/AddStudentSheet/AddStudentSheet";
 import AddStudentManual from "../components/pages/AddStudentManual/AddStudentManual";
-import Profile from "../components/pages/Profile/Profile";
 import Terms from "../components/pages/Terms/Terms";
 import AddTerm from "../components/pages/AddTerm/AddTerm";
 import Payments from "../components/pages/Payments/Payments";
@@ -37,7 +36,7 @@ import ForgetPassword from "../components/pages/ForgetPassword/ForgetPassword";
 const AppRouter = () => (
   <BrowserRouter>
     <Switch>
-      <Route path="/" component={Home} exact={true} />
+      {/*<Route path="/" component={Home} exact={true} />
       <ProtectedRoute
         role={studentRole}
         path="/registercourses"
@@ -91,11 +90,11 @@ const AppRouter = () => (
         path="/department"
         component={Department}
         exact={true}
-      />
+      />*/}
       <ProtectedRoute
-        role={lecturerRole}
-        path="/student-marks"
-        component={StudentMarks}
+        role={[lecturerRole, adminRole]}
+        path="/"
+        component={WritePost}
         exact={true}
       />
       <ProtectedRoute
@@ -171,12 +170,6 @@ const AppRouter = () => (
         exact={true}
       />
       <ProtectedRoute
-        role={studentRole}
-        path="/profile"
-        component={Profile}
-        exact={true}
-      />
-      <ProtectedRoute
         role={adminRole}
         path="/payments"
         component={Payments}
@@ -206,16 +199,8 @@ const AppRouter = () => (
         component={Provement}
         exact={true}
       />
-      <Route
-        path="/login"
-        component={Login}
-        exact={true}
-      />
-      <Route
-        path="/forget-password"
-        component={ForgetPassword}
-        exact={true}
-      />
+      <Route path="/login" component={Login} exact={true} />
+      <Route path="/forget-password" component={ForgetPassword} exact={true} />
       <Route path="*" component={NotFound} />
     </Switch>
   </BrowserRouter>

@@ -15,15 +15,12 @@ export default class EditMaterialBody extends Component {
           <div className="container-fluid">
             <div className="row mb-2">
               <div className="col-sm-6">
-                <h1 className="m-0 text-dark">Starter Page</h1>
+                <h1 className="m-0 text-dark">Edit Materials</h1>
               </div>
               {/* /.col */}
               <div className="col-sm-6">
                 <ol className="breadcrumb float-sm-right">
-                  <li className="breadcrumb-item">
-                    <NavLink to="/">Home</NavLink>
-                  </li>
-                  <li className="breadcrumb-item active">Starter Page</li>
+                  <li className="breadcrumb-item active">Edit Materials</li>
                 </ol>
               </div>
               {/* /.col */}
@@ -49,7 +46,6 @@ export default class EditMaterialBody extends Component {
                       data-dropdown-css-class="select2-danger"
                       style={{ width: "100%" }}
                     >
-                      <option value="flutter">flutter</option>
                       <option value="java">java</option>
                       <option>c++</option>
                       <option>python</option>

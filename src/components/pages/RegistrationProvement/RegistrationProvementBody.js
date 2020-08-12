@@ -31,9 +31,6 @@ export default class RegisterationProvementBody extends Component {
               {/* /.col */}
               <div className="col-sm-6">
                 <ol className="breadcrumb float-sm-right">
-                  <li className="breadcrumb-item">
-                    <NavLink to="/">Home</NavLink>
-                  </li>
                   <li className="breadcrumb-item active">
                     Registration provement
                   </li>
