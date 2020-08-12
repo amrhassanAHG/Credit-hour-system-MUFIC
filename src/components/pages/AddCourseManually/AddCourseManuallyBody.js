@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { NavLink } from "react-router-dom";
+import validator from 'validator';
 import userService from "../../../services/user.service";
 
 export default class AddCourseManuallyBody extends Component {
@@ -39,6 +40,30 @@ export default class AddCourseManuallyBody extends Component {
 
   onSubmit = (e) => {
     e.preventDefault();
+    const el = document.getElementsByName("addCourse-item");
+    let isValid = true ;
+
+    const elHours = document.getElementsByName("addCourse-item-hourse");
+    
+    const isHours = /^[1-9]+$/;
+    
+    for(let i = 0 ; i < elHours.length; i++){
+      const isMatch = isHours.test(elHours[i].value);
+      if(!isMatch) {
+        elHours[i].classList.add('is-invalid');
+      } else elHours[i].classList.remove('is-invalid');
+    }
+
+
+    for(let i = 0 ; i < el.length; i++){
+       if(validator.isEmpty(el[i].value) || el[i].classList.contains('is-invalid')){
+         el[i].classList.add('is-invalid');
+         isValid = false ;
+       } else el[i].classList.remove('is-invalid');
+    }
+
+    if(isValid === false) return;
+
     const course = {
       code: this.state.code,
       nameEnglish: this.state.nameEnglish,
@@ -109,95 +134,174 @@ export default class AddCourseManuallyBody extends Component {
               <div className="card-header">
                 <h3 className="card-title  ">Add Course</h3>
               </div>
-              <form className="form" role="form" onSubmit={this.onSubmit}>
-                <div className="col">
-                  <div className="form-group ">
+              <div className='card-body'>
+                 <form className="form" role="form" onSubmit={this.onSubmit}>
+                  <div className='row'>
+                  <div className="form-group col-6">
                     <label htmlFor="code">Course code</label>
                     <input
+                      name='addCourse-item'
                       value={this.state.code}
                       onChange={(e) => {
-                        const newValue = e.target.value;
+                        let newValue = e.target.value;
+                        newValue = newValue.trim();
+                        if(!validator.isAlphanumeric(newValue)){
+                          e.target.classList.add('is-invalid');
+                        } else {
+                          e.target.classList.add('is-valid');
+                          e.target.classList.remove('is-invalid');
+                        }
                         this.setState({ code: newValue });
                       }}
                       type="text"
                       className="form-control"
                       id="code"
                     />
+                  <div class="invalid-feedback">
+                      it should contains english letters and numbers only
                   </div>
-                  <hr />
-                  <div className="form-group ">
+                  </div>
+                  </div>
+                  <div className='row'>
+                  <div className="form-group col-6">
                     <label htmlFor="englishName">English Name</label>
                     <input
+                      name='addCourse-item'
                       value={this.state.nameEnglish}
                       onChange={(e) => {
-                        const newValue = e.target.value;
+                        const newValue = e.target.value.trim();
+                        const isEnglish = /^[a-zA-Z]+$/;
+                        const isMatch = isEnglish.test(newValue);
+                        if(!isMatch) {
+                          e.target.classList.add('is-invalid');
+                          
+                        } else {
+                          e.target.classList.add('is-valid');
+                          e.target.classList.remove('is-invalid');  
+                        }
                         this.setState({ nameEnglish: newValue });
                       }}
                       type="text"
                       className="form-control"
                       id="englishName"
                     />
+                  <div class="invalid-feedback">
+                      please enter english letters only
                   </div>
-                  <hr />
-                  <div className="form-group ">
+                  </div>
+                  
+                  <div className="form-group col-6">
                     <label htmlFor="arabicName">Arabic Name</label>
                     <input
+                      name='addCourse-item'
                       value={this.state.nameArabic}
                       onChange={(e) => {
-                        const newValue = e.target.value;
+                        const newValue = e.target.value.trim();
+                        const isArabic = /^[\u0600-\u06FF]+$/;
+                        const isMatch = isArabic.test(newValue);
+                        if(!isMatch) {
+                          e.target.classList.add('is-invalid');
+                          
+                        } else {
+                          e.target.classList.add('is-valid');
+                          e.target.classList.remove('is-invalid');
+                        }
                         this.setState({ nameArabic: newValue });
                       }}
                       type="text"
                       className="form-control"
                       id="arabicName"
                     />
+                      <div class="invalid-feedback">
+                        please enter arabic letters only
+                      </div>
                   </div>
-                  <hr />
-                  <div className="form-group ">
+                  </div>
+                  <div className='row'>
+                  <div className="form-group col">
                     <label htmlFor="hours">Hours</label>
                     <input
+                      name='addCourse-item-hourse'
                       value={this.state.hours}
                       onChange={(e) => {
                         const newValue = e.target.value;
+                        const isHours = /^[1-9]+$/;
+                        const isMatch = isHours.test(newValue);
+                        if(!isMatch) {
+                          e.target.classList.add('is-invalid');
+                          
+                        } else {
+                          e.target.classList.add('is-valid');
+                          e.target.classList.remove('is-invalid');  
+                        }
                         this.setState({ hours: newValue });
                       }}
                       type="number"
                       className="form-control"
                       id="hours"
                     />
+                    <div class="invalid-feedback">
+                      please enter a number greater than 0
+                    </div>
                   </div>
-                  <hr />
-                  <div className="form-group ">
+                  <div className="form-group col">
                     <label htmlFor="lecHours">Lec Hours</label>
                     <input
+                      name='addCourse-item-hourse'
                       value={this.state.lecHours}
                       onChange={(e) => {
                         const newValue = e.target.value;
+                        const isHours = /^[1-9]+$/;
+                        const isMatch = isHours.test(newValue);
+                        if(!isMatch) {
+                          e.target.classList.add('is-invalid');
+                          
+                        } else {
+                          e.target.classList.add('is-valid');
+                          e.target.classList.remove('is-invalid');  
+                        }
                         this.setState({ lecHours: newValue });
                       }}
                       type="number"
                       className="form-control"
                       id="lecHours"
                     />
+                    <div class="invalid-feedback">
+                      please enter a number greater than 0
+                    </div>
                   </div>
-                  <hr />
-                  <div className="form-group ">
+                  <div className="form-group col">
                     <label htmlFor="labHours">Lab Hours</label>
                     <input
+                      name='addCourse-item-hourse'
                       value={this.state.labHours}
                       onChange={(e) => {
                         const newValue = e.target.value;
+                        const isHours = /^[1-9]+$/;
+                        const isMatch = isHours.test(newValue);
+                        if(!isMatch) {
+                          e.target.classList.add('is-invalid');
+                          
+                        } else {
+                          e.target.classList.add('is-valid');
+                          e.target.classList.remove('is-invalid');  
+                        }
                         this.setState({ labHours: newValue });
                       }}
                       type="number"
                       className="form-control"
                       id="labHours"
                     />
+                    <div class="invalid-feedback">
+                      please enter a number greater than 0
+                    </div>
                   </div>
-                  <hr />
-                  <div className="form-group">
+                  </div>
+                  <div className='row'>
+                  <div className="form-group col">
                     <label htmlFor="program">program Id</label>
                     <input
+                      name='addCourse-item'
                       value={this.state.program}
                       onChange={(e) => {
                         const newValue = e.target.value;
@@ -208,10 +312,10 @@ export default class AddCourseManuallyBody extends Component {
                       id="program"
                     />
                   </div>
-                  <hr />
-                  <div className="form-group">
+                  <div className="form-group col">
                     <label>Pre Course</label>
-                    <select
+                    <select 
+                      className='form-control'
                       onChange={(e) => {
                         const newValue = e.target.value;
                         this.setState({ preCourse: newValue });
@@ -227,12 +331,20 @@ export default class AddCourseManuallyBody extends Component {
                       ))}
                     </select>
                   </div>
-                  <hr />
+                  </div>
+                  {/* add radio button for forced and  unforced*/}
                   <div className="form-group ">
                     <label>Description</label>
                     <textarea
+                      name='addCourse-item'
                       onChange={(e) => {
                         const newValue = e.target.value;
+                        if(validator.isEmpty(newValue)){
+                          e.target.classList.add('is-invalid');
+                        } else {
+                          e.target.classList.add('is-valid');
+                          e.target.classList.remove('is-invalid');
+                        }
                         this.setState({ description: newValue });
                       }}
                       rows={3}
@@ -242,7 +354,6 @@ export default class AddCourseManuallyBody extends Component {
                     />
                   </div>
                   <hr />
-                </div>
                 <div className="card-footer float-right">
                   <button type="submit" className="btn btn-primary">
                     Add
@@ -250,6 +361,7 @@ export default class AddCourseManuallyBody extends Component {
                 </div>
                 {/* /.modal-content */}
               </form>
+              </div>
             </div>
           </div>
           {/* /.row */}
