@@ -45,12 +45,13 @@ export default class AddCourseManuallyBody extends Component {
 
     const elHours = document.getElementsByName("addCourse-item-hourse");
     
-    const isHours = /^[1-9]+$/;
+    const isHours = /^[1-9][0-9]*$/;
     
     for(let i = 0 ; i < elHours.length; i++){
       const isMatch = isHours.test(elHours[i].value);
       if(!isMatch) {
         elHours[i].classList.add('is-invalid');
+        isValid = false ;
       } else elHours[i].classList.remove('is-invalid');
     }
 
@@ -225,7 +226,7 @@ export default class AddCourseManuallyBody extends Component {
                       value={this.state.hours}
                       onChange={(e) => {
                         const newValue = e.target.value;
-                        const isHours = /^[1-9]+$/;
+                        const isHours = /^[1-9][0-9]*$/;
                         const isMatch = isHours.test(newValue);
                         if(!isMatch) {
                           e.target.classList.add('is-invalid');
@@ -251,7 +252,7 @@ export default class AddCourseManuallyBody extends Component {
                       value={this.state.lecHours}
                       onChange={(e) => {
                         const newValue = e.target.value;
-                        const isHours = /^[1-9]+$/;
+                        const isHours = /^[1-9][0-9]*$/;
                         const isMatch = isHours.test(newValue);
                         if(!isMatch) {
                           e.target.classList.add('is-invalid');
@@ -277,7 +278,7 @@ export default class AddCourseManuallyBody extends Component {
                       value={this.state.labHours}
                       onChange={(e) => {
                         const newValue = e.target.value;
-                        const isHours = /^[1-9]+$/;
+                        const isHours = /^[1-9][0-9]*$/;
                         const isMatch = isHours.test(newValue);
                         if(!isMatch) {
                           e.target.classList.add('is-invalid');
