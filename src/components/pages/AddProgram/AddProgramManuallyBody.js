@@ -14,14 +14,7 @@ export default class AddProgramManuallyBody extends Component {
   }
 
   componentDidMount() {
-  //   userService.getData("programs").then(
-  //     (response) => {
-  //       // const programsData = response.data.programs;
-  //     },
-  //     (error) => {
-
-  //     }
-  //   );
+  
   }
 
   onSubmit = (e) => {
