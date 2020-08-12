@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, Link } from "react-router-dom";
 import axios from "axios";
 import { serverURL } from "../../../staticData";
 import userService from "../../../services/user.service";
@@ -133,7 +133,7 @@ export default class AdminCourses extends Component {
                         type="submit"
                         className="btn btn-success "
                       >
-                        New
+                        <Link to='/add-course-manually' className='text-light'>New</Link>
                       </button>
                     </div>
                   </div>
