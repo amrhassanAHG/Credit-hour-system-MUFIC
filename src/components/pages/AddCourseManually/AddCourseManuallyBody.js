@@ -197,8 +197,8 @@ export default class AddCourseManuallyBody extends Component {
                       name='addCourse-item'
                       value={this.state.nameArabic}
                       onChange={(e) => {
-                        const newValue = e.target.value.trim();
-                        const isArabic = /^[\u0600-\u06FF]+$/;
+                        const newValue = e.target.value;
+                        const isArabic = /^[\u0600-\u06FF]+[(\u0600-\u06FF)|(\s)]*$/;
                         const isMatch = isArabic.test(newValue);
                         if(!isMatch) {
                           e.target.classList.add('is-invalid');
@@ -214,7 +214,7 @@ export default class AddCourseManuallyBody extends Component {
                       id="arabicName"
                     />
                       <div class="invalid-feedback">
-                        please enter arabic letters only
+                        please enter arabic letters only and it should start with letter not spaces
                       </div>
                   </div>
                   </div>
