@@ -133,7 +133,7 @@ export default class AdminCourses extends Component {
                         type="submit"
                         className="btn btn-success "
                       >
-                        <Link to='/add-course-manually' className='text-light'>New</Link>
+                        <Link to='/add-program-manually' className='text-light'>New</Link>
                       </button>
                     </div>
                   </div>

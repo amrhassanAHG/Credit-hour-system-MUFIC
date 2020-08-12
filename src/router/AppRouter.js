@@ -34,6 +34,7 @@ import Payments from "../components/pages/Payments/Payments";
 import RegistrationProvement from "../components/pages/RegistrationProvement/RegistrationProvement";
 import Provement from "../components/pages/Provement/Provement";
 import AddCourseManually from "../components/pages/AddCourseManually/AddCourseManually";
+import AddProgramManually from "../components/pages/AddProgram/AddProgramManually";
 import Login from "../components/pages/Login/Login";
 import ForgetPassword from "../components/pages/ForgetPassword/ForgetPassword";
 
@@ -213,6 +214,12 @@ const AppRouter = () => (
         role={adminRole}
         path="/add-course-manually"
         component={AddCourseManually}
+        exact={true}
+      />
+      <ProtectedRoute
+        role={adminRole}
+        path="/add-program-manually"
+        component={AddProgramManually}
         exact={true}
       />
       <ProtectedRoute
