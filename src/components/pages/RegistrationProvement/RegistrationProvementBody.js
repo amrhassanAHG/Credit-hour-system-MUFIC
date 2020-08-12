@@ -4,7 +4,18 @@ import { NavLink } from "react-router-dom";
 export default class RegisterationProvementBody extends Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {
+      name: "",
+      to: "",
+      level: "1",
+      dep: "1",
+      year: "",
+    };
+  }
+
+  go = e=>{
+    const {name, to, level, dep, year} = this.state
+    this.props.history.push(`/provement?${name}?${to}?${level}?${dep}?${year}`)
   }
 
   render() {
@@ -15,15 +26,17 @@ export default class RegisterationProvementBody extends Component {
           <div className="container-fluid">
             <div className="row mb-2">
               <div className="col-sm-6">
-                <h1 className="m-0 text-dark">Starter Page</h1>
+                <h1 className="m-0 text-dark">Registration provement</h1>
               </div>
               {/* /.col */}
               <div className="col-sm-6">
                 <ol className="breadcrumb float-sm-right">
                   <li className="breadcrumb-item">
-                    <a href="#">Home</a>
+                    <NavLink to="/">Home</NavLink>
                   </li>
-                  <li className="breadcrumb-item active">Starter Page</li>
+                  <li className="breadcrumb-item active">
+                    Registration provement
+                  </li>
                 </ol>
               </div>
               {/* /.col */}
@@ -48,19 +61,29 @@ export default class RegisterationProvementBody extends Component {
                 {/* form start */}
                 <div className="card-body">
                   <div className="form-group">
-                    <label htmlFor="exampleInputEmail1"> Student Name</label>
+                    <label htmlFor="name">Student Name</label>
                     <input
+                      value={this.state.name}
+                      onChange={(e) => {
+                        const newValue = e.target.value;
+                        this.setState({ name: newValue });
+                      }}
                       type="text"
                       className="form-control"
-                      id="title"
+                      id="name"
                       placeholder="Enter Name"
                     />
                   </div>
                   <div className="form-group">
-                    <label htmlFor="exampleInputPassword1">TO</label>
+                    <label htmlFor="to">TO</label>
                     <input
+                      value={this.state.to}
+                      onChange={(e) => {
+                        const newValue = e.target.value;
+                        this.setState({ to: newValue });
+                      }}
                       className="form-control"
-                      id="hint"
+                      id="to"
                       placeholder="TO"
                     />
                   </div>
@@ -68,42 +91,59 @@ export default class RegisterationProvementBody extends Component {
                     <div className="col-sm-3">
                       {/* select */}
                       <div className="form-group">
-                        <select className="form-control">
-                          <option>الفرقه الاولي</option>
-                          <option>الفرقه الثانيه</option>
-                          <option>الفرقه الثالثه</option>
-                          <option>الفرقه الرابعه</option>
+                        <select
+                          value={this.state.level}
+                          className="form-control"
+                          onChange={(e) => {
+                            const newValue = e.target.value;
+                            this.setState({ level: newValue });
+                          }}
+                        >
+                          <option value="1">الفرقه الاولي</option>
+                          <option value="2">الفرقه الثانيه</option>
+                          <option value="3">الفرقه الثالثه</option>
+                          <option value="4">الفرقه الرابعه</option>
                         </select>
                       </div>
                     </div>
                     <div className="col-sm-3  ">
                       {/* select */}
                       <div className="form-group">
-                        <select className="form-control">
-                          <option>عام </option>
-                          <option>هلوم حاسب</option>
-                          <option>نظم معلومات</option>
+                        <select
+                          value={this.state.dep}
+                          onChange={(e) => {
+                            const newValue = e.target.value;
+                            this.setState({ dep: newValue });
+                          }}
+                          className="form-control"
+                        >
+                          <option value="1">عام</option>
+                          <option value="2">علوم حاسب</option>
+                          <option value="3">نظم معلومات</option>
+                          <option value="4">تكنولوجيا المعلومات</option>
+                          <option value="5">هندسه برمجيات</option>
+                          <option value="6">المعلوماتية الحيوية</option>
                         </select>
                       </div>
                     </div>
                     <div className="col-sm-3">
-                      {/* select */}
                       <div className="input">
-                        <select className="form-control">
-                          <option>2019/2020</option>
-                          <option>2020/2021</option>
-                          <option>2021/2022</option>
-                          <option>2022/2023</option>
-                        </select>
+                        <input
+                          value={this.state.year}
+                          onChange={(e) => {
+                            const newValue = e.target.value;
+                            this.setState({ year: newValue });
+                          }}
+                          className="form-control"
+                          placeholder="العام الجامعي"
+                        />
                       </div>
                     </div>
                   </div>
                 </div>
                 {/* /.card-body */}
                 <div className="card-footer">
-                  <NavLink to="/provement">
-                    <button className="btn btn-success">GO</button>
-                  </NavLink>
+                  <button onClick={this.go} className="btn btn-success">GO</button>
                 </div>
               </div>
             </div>

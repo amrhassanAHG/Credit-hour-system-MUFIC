@@ -66,7 +66,6 @@ export default class AddCourseManuallyBody extends Component {
       program: 1,
       preCourse: "none",
     });
-    window.location.reload();
   };
 
   render() {

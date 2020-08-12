@@ -282,22 +282,6 @@ export default class Sidebar extends Component {
 
               {this.state.role === adminRole && (
                 <ul className="nav nav-pills nav-sidebar flex-column">
-                  <li className="nav-header">Administrator</li>
-
-                  <li className="nav-item">
-                    <NavLink
-                      to="/dashboard"
-                      activeClassName="active"
-                      className="nav-link"
-                    >
-                      <i className="nav-icon fas fa-tachometer-alt"></i>
-                      <p>
-                        DashBoard
-                        {/* <span className="right badge badge-danger">New</span> */}
-                      </p>
-                    </NavLink>
-                  </li>
-
                   <li className="nav-item">
                     <NavLink
                       to="/terms"
@@ -350,17 +334,6 @@ export default class Sidebar extends Component {
 
                   <li className="nav-item">
                     <NavLink
-                      to="/sections"
-                      activeClassName="active"
-                      className="nav-link"
-                    >
-                      <i className="nav-icon fa fa-school"></i>
-                      <p>Sections</p>
-                    </NavLink>
-                  </li>
-
-                  <li className="nav-item">
-                    <NavLink
                       to="/payments"
                       activeClassName="active"
                       className="nav-link"
@@ -378,17 +351,6 @@ export default class Sidebar extends Component {
                     >
                       <i className="nav-icon fa fa-check"></i>
                       <p>Registeration provement</p>
-                    </NavLink>
-                  </li>
-
-                  <li className="nav-item">
-                    <NavLink
-                      to="/guides"
-                      activeClassName="active"
-                      className="nav-link"
-                    >
-                      <i className="nav-icon fa fa-hands-helping"></i>
-                      <p>Guides</p>
                     </NavLink>
                   </li>
 

@@ -2,13 +2,16 @@ import React from 'react'
 import NavSideBar from '../../layout/NavSideBar'
 import ProvementBody from './ProvementBody'
 import Footer from '../../layout/Footer'
+import './Provement.css';
 
-const Provement = ()=>(
+const Provement = (props)=>(
     <div>
         <NavSideBar>
-            <ProvementBody />
+            <ProvementBody history={props.history}/>
         </NavSideBar>
-        <Footer />
+        <div className="noprint">
+            <Footer />
+        </div>
     </div>
 );
 

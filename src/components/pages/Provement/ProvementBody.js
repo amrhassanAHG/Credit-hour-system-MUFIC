@@ -1,10 +1,79 @@
 import React, { Component } from "react";
 import { NavLink } from "react-router-dom";
+import "./Provement.css";
 
 export default class ProvementBody extends Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {
+      name: "(اسم الشخص)",
+      to: "(الجهه المقصوده)",
+      level: "(الفرقه)",
+      dep: "(القسم)",
+      year: "(العام الجامعي)",
+    };
+  }
+
+  componentDidMount() {
+    const params = this.props.history.location.search;
+
+    if (params) {
+      let idx = 1;
+      let cnt = 1;
+      for (let i = 1; i <= params.length; ++i) {
+        if (i === params.length || params[i] === "?") {
+          const newValue = params.slice(idx, i);
+          idx = i + 1;
+
+          if (cnt === 1) {
+            this.setState({ name: newValue });
+          } else if (cnt === 2) {
+            this.setState({ to: newValue });
+          } else if (cnt === 3) {
+            let newLevel = "";
+            switch (newValue) {
+              case "1":
+                newLevel = "الفرقه الاولي";
+                break;
+              case "2":
+                newLevel = "الفرقه التانيه";
+                break;
+              case "3":
+                newLevel = "الفرقه التالته";
+                break;
+              default:
+                newLevel = "الفرقه الرابعه";
+            }
+            this.setState({ level: newLevel });
+          } else if (cnt === 4) {
+            let newDep = "";
+            switch (newValue) {
+              case "1":
+                newDep = "عام";
+                break;
+              case "2":
+                newDep = "علوم الحاسب";
+                break;
+              case "3":
+                newDep = "نظم المعلومات";
+                break;
+              case "4":
+                newDep = "تكنولوجيا المعلومات";
+                break;
+              case "5":
+                newDep = "هندسه البرمجيات";
+                break;
+              default:
+                newDep = "المعلوماتيه الحيويه";
+            }
+            this.setState({ dep: newDep });
+          } else if (cnt === 5) {
+            this.setState({ year: newValue });
+          }
+          ++cnt;
+        }
+      }
+    }
   }
 
   render() {
@@ -99,7 +168,7 @@ export default class ProvementBody extends Component {
                     <br />
                     <br />
                     <span style={{ fontSize: 30 }}>
-                      <b>مصلحه التضامن الاجتماعي -اشمون -ساقيه ابو شعرة</b>
+                      <b>{this.state.to}</b>
                     </span>
                     <br />
                     <br />
@@ -114,8 +183,9 @@ export default class ProvementBody extends Component {
                     <br />
                     <span style={{ fontSize: 25 }}>
                       <i>
-                        نحيط علم سيادتكم بأن الطالب /ادهم سلامه بيومي مقيد
-                        بالكليه بالفرقه الثانيه عام 2019/2020{" "}
+                        نحيط سيادتكم علما بان الطالب / {this.state.name} مقيد ب{" "}
+                        {this.state.level} قسم {this.state.dep} العام الجامعي{" "}
+                        {this.state.year}
                       </i>
                     </span>{" "}
                     <br />
@@ -160,8 +230,10 @@ export default class ProvementBody extends Component {
               </div>
             </div>
             <button
-              onclick="window.print()"
-              className="btn btn-primary  "
+              onClick={() => {
+                window.print();
+              }}
+              className="btn btn-primary noprint"
               style={{ width: 100, paddingTop: 10, paddingBottom: 10 }}
             >
               Print

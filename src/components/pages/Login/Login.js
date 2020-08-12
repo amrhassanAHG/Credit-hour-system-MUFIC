@@ -26,7 +26,7 @@ export default class Page extends Component {
       /*if (!isEmail(email)) {
         message.innerHTML = "enter a valid email";
       } else {*/
-      const userData = AuthService.login(email, pass);
+      const userData = AuthService.login(email, pass, 1);
       
       Promise.resolve(userData).then((value) => {
         if(!value) {

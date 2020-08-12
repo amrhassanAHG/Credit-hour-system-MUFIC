@@ -1,12 +1,13 @@
 import axios from "axios";
-import {serverURL} from '../staticData'
+import { serverURL } from "../staticData";
+import Cookies from 'js-cookie'
 
 const API_URL = `${serverURL}/api/auth/`;
 
 class AuthService {
   constructor() {}
 
-  login(username, password) {
+  login(username, password, days) {
     return axios
       .post(API_URL + "signin", {
         username,
@@ -14,28 +15,35 @@ class AuthService {
       })
       .then((response) => {
         if (response.data.accessToken) {
-          localStorage.setItem("MuficUser", JSON.stringify(response.data));
+          Cookies.set("MuficUser", JSON.stringify(response.data), {
+            expires: days,
+          });
         }
 
         return response.data;
-      }).catch((error)=>{})
+      })
+      .catch((error) => {});
   }
 
   logout() {
-    localStorage.removeItem("MuficUser");
+    Cookies.remove("MuficUser");
   }
 
   getCurrentUser() {
-      return JSON.parse(localStorage.getItem("MuficUser"));
+    const user = Cookies.get("MuficUser");
+    if(user)
+      return JSON.parse(user)
+    else
+      return undefined
   }
 
   getRole() {
-      const user = this.getCurrentUser() 
-      if(user){
-        return user.roles.find(role => role.includes('ROLE'))
-      }else{
-        return ""
-      }
+    const user = this.getCurrentUser();
+    if (user) {
+      return user.roles.find((role) => role.includes("ROLE"));
+    } else {
+      return "";
+    }
   }
 }
 
