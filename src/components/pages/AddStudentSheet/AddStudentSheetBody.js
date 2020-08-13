@@ -1,19 +1,83 @@
 import React, { Component } from "react";
 import { NavLink } from "react-router-dom";
 import readXlsxFile from "read-excel-file";
+import userService from "../../../services/user.service";
+import myFile from "../../../assets/students.xlsx";
 
 export default class AddStudentSheetBody extends Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {
+      students: [],
+    };
   }
 
-  onFileChange = (e)=>{
-    console.log(e.target.value);
-    readXlsxFile(e.target.files[0]).then((rows) => {
-        console.log(rows);
-    })
-  }
+  onFileChange = (e) => {
+    const nameLen = e.target.value.length;
+    if (nameLen > 4 && e.target.value.slice(nameLen - 5, nameLen) === ".xlsx") {
+      document.getElementById("labelForFile").innerHTML =
+        e.target.files[0].name;
+
+      readXlsxFile(e.target.files[0]).then((rows) => {
+        const len = rows.length;
+        for (let i = 1; i < len; ++i) {
+          let student = {
+            nameEnglish: null,
+            nameArabic: null,
+            nationality: null,
+            gender: null,
+            religion: null,
+            nationalId: null,
+            guardianName: null,
+            email: null,
+            secSchool: null,
+            preQualfication: null,
+            degrees: null,
+            guide: null,
+            department: null,
+            city: null,
+            dob: null,
+            guardianJob: null,
+            quilificationYear: null,
+          };
+
+          student.nameEnglish = rows[i][0];
+          student.nameArabic = rows[i][1];
+          student.nationality = rows[i][2];
+          student.gender = rows[i][3];
+          student.religion = rows[i][4];
+          student.nationalId = rows[i][5];
+          student.guardianName = rows[i][6];
+          student.email = rows[i][7];
+          student.secSchool = rows[i][8];
+          student.preQualification = rows[i][9];
+          student.degrees = rows[i][10];
+          student.guide = rows[i][11];
+          student.department = rows[i][12];
+          student.city = rows[i][13];
+          student.dob = rows[i][14];
+          student.guardianJob = rows[i][15];
+          student.qualificationYear = rows[i][16];
+
+          const newStudents = this.state.students.concat(student);
+          this.setState({ students: newStudents });
+        }
+      });
+    }
+  };
+
+  onSendData = (e) => {
+    e.preventDefault();
+
+    userService.sendData("students", this.state.students).then(
+      (response) => {
+        alert("data sent successfully");
+      },
+      (error) => {
+        alert("can't send data");
+      }
+    );
+  };
 
   render() {
     return (
@@ -49,10 +113,10 @@ export default class AddStudentSheetBody extends Component {
           <div className="container-fluid">
             <div className="card card-primary">
               <div className="card-header">
-                <h3 className="card-title">Courses Info</h3>
+                <h3 className="card-title">Add students by excel sheet</h3>
               </div>
               {/* form start */}
-              <form role="form">
+              <form>
                 <div className="card-body">
                   <div className="info-box">
                     <span className="info-box-icon bg-success">
@@ -66,9 +130,11 @@ export default class AddStudentSheetBody extends Component {
                       <div className="form-group">
                         <label htmlFor="exampleInputFile">File download</label>
                         <div className="input-group">
-                          <span className="btn btn-primary" id="">
-                            Download
-                          </span>
+                          <a href={myFile} download>
+                            <span className="btn btn-primary" id="">
+                              Download
+                            </span>
+                          </a>
                         </div>
                       </div>
                     </div>
@@ -85,18 +151,19 @@ export default class AddStudentSheetBody extends Component {
                         upload excel sheet to insert students
                       </span>
                       <div className="form-group">
-                        <label htmlFor="exampleInputFile">File input</label>
+                        <label htmlFor="inputFile">File input</label>
                         <div className="input-group">
                           <div className="custom-file">
                             <input
                               type="file"
                               className="custom-file-input"
-                              id="exampleInputFile"
+                              id="inputFile"
                               onChange={this.onFileChange}
                             />
                             <label
                               className="custom-file-label"
-                              htmlFor="exampleInputFile"
+                              htmlFor="inputFile"
+                              id="labelForFile"
                             >
                               Choose file
                             </label>
@@ -115,7 +182,7 @@ export default class AddStudentSheetBody extends Component {
                 {/* /.card-body */}
 
                 <div className="card-footer">
-                  <button type="submit" className="btn btn-primary">
+                  <button onClick={this.onSendData} className="btn btn-primary">
                     Submit
                   </button>
                 </div>

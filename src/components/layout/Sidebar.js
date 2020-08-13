@@ -69,7 +69,6 @@ export default class Sidebar extends Component {
             >
               {false && (
                 <ul className="nav nav-pills nav-sidebar flex-column">
-                  <li className="nav-header">Student</li>
                   <li className="nav-item">
                     <NavLink
                       to="/registercourses"
@@ -191,13 +190,6 @@ export default class Sidebar extends Component {
                   <li className="nav-item">
                     <NavLink
                       to="/write-post"
-                      onClick={
-                        () => {
-                          setTimeout(() => {
-                             window.location.reload();   
-                          }, 0.1);
-                        }
-                      }
                       activeClassName="active"
                       className="nav-link"
                     >
@@ -258,13 +250,6 @@ export default class Sidebar extends Component {
                   <li className="nav-item">
                     <NavLink
                       to="/write-post"
-                      onClick={
-                        () => {
-                          setTimeout(() => {
-                             window.location.reload();   
-                          }, 0.1);
-                        }
-                      }
                       activeClassName="active"
                       className="nav-link"
                     >

@@ -11,6 +11,10 @@ class UserService {
   sendData(API_URL, data) {
     return http.post(API_URL, data)
   }
+
+  removeData(API_URL) {
+    return http.delete(API_URL)
+  }
 }
 
 export default new UserService();
