@@ -315,6 +315,13 @@ export default class Sidebar extends Component {
                   <li className="nav-item">
                     <NavLink
                       to="/write-post"
+                      onClick={
+                        () => {
+                          setTimeout(() => {
+                             window.location.reload();   
+                          }, 0.1);
+                        }
+                      }
                       activeClassName="active"
                       className="nav-link"
                     >
