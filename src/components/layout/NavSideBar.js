@@ -36,16 +36,6 @@ export default class NavSideBar extends Component {
                 <i className="fas fa-bars"></i>
               </a>
             </li>
-            <li className="nav-item d-none d-sm-inline-block">
-              <a href="#" className="nav-link">
-                Home
-              </a>
-            </li>
-            <li className="nav-item d-none d-sm-inline-block">
-              <a href="#" className="nav-link">
-                Contact
-              </a>
-            </li>
           </ul>
 
           {/* Right navbar links */}
@@ -53,7 +43,7 @@ export default class NavSideBar extends Component {
             <ul className="navbar-nav ml-auto">
               <li
                 className="nav-item dropdown user user-menu"
-                style={{marginTop: "8px", marginRight: '5px'}}
+                style={{ marginTop: "8px", marginRight: "5px" }}
               >
                 {/* Menu Toggle Button */}
                 <a href="#" className="dropdown-toggle" data-toggle="dropdown">
@@ -76,22 +66,12 @@ export default class NavSideBar extends Component {
                       className="img-circle"
                       alt="User Image"
                     />
-                    <p>
-                      Alexander Pierce - Web Developer
-                      <small>Member since Nov. 2012</small>
-                    </p>
+                    <p>{AuthService.getCurrentUser().username}</p>
                   </li>
                   {/* Menu Body */}
                   <li className="user-body">
                     <div className="row">
-                      <div className="col-sm-4 text-center">
-                        <NavLink
-                          to="/profile"
-                          className="btn btn-default btn-flat"
-                        >
-                          Profile
-                        </NavLink>
-                      </div>
+                      <div className="col-sm-4 text-center"></div>
                       <div className="col-sm-4 text-center"></div>
                       <div className="col-xs-4 text-center">
                         <a

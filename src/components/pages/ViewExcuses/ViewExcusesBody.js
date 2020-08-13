@@ -20,11 +20,7 @@ export default class ViewExcuses extends Component {
               {/* /.col */}
               <div className="col-sm-6">
                 <ol className="breadcrumb float-sm-right">
-                  <li className="breadcrumb-item ">
-                    <NavLink to="/">Home</NavLink>
-                  </li>
-                  <li className="breadcrumb-item">excuses</li>
-                  <li className="breadcrumb-item active">view</li>
+                  <li className="breadcrumb-item">view excuses</li>
                 </ol>
               </div>
               {/* /.col */}
@@ -48,12 +44,11 @@ export default class ViewExcuses extends Component {
                     <div className="form-group">
                       <label>select A matirail</label>
                       <select
-                        defaultValue="flutter"
+                        defaultValue="java"
                         className="form-control select2 select2-danger"
                         data-dropdown-css-class="select2-danger"
                         style={{ width: "100%" }}
                       >
-                        <option value="flutter">flutter</option>
                         <option value="java">java</option>
                         <option>c++</option>
                         <option>python</option>
@@ -71,7 +66,7 @@ export default class ViewExcuses extends Component {
                   <div className="col-md-12">
                     <div className="card">
                       <div className="card-header">
-                        <h3 className="card-title"> Registered students </h3>
+                        <h3 className="card-title"> Students execuses </h3>
                       </div>
                       {/* /.card-header */}
                       <div className="card-body">
@@ -91,7 +86,7 @@ export default class ViewExcuses extends Component {
                             <tr>
                               <td>1/1/2020.</td>
                               <td>Mohamed osama el shwiakh</td>
-                              <td>يسيشيسشيشسيشسيشسيشييسشسيخىنثيكثنثبث</td>
+                              <td>I was sick</td>
 
                               <td className="project-actions text-right">
                                 <a className="btn btn-primary btn-sm" href="#">
@@ -109,7 +104,7 @@ export default class ViewExcuses extends Component {
                             <tr>
                               <td>1/1/2020.</td>
                               <td>Mohamed osama el shwiakh</td>
-                              <td>يسيشيسشيشسيشسيشسيشييسشسيخىنثيكثنثبث</td>
+                              <td>I was sick</td>
                               <td className="project-actions text-right">
                                 <a className="btn btn-primary btn-sm" href="#">
                                   <i className="fas fa-folder"></i>
@@ -126,24 +121,7 @@ export default class ViewExcuses extends Component {
                             <tr>
                               <td>1/1/2020.</td>
                               <td>Mohamed osama el shwiakh</td>
-                              <td>يسيشيسشيشسيشسيشسيشييسشسيخىنثيكثنثبث</td>
-                              <td className="project-actions text-right">
-                                <a className="btn btn-primary btn-sm" href="#">
-                                  <i className="fas fa-folder"></i>
-                                  View
-                                </a>
-                              </td>
-                              <td className="project-actions text-right">
-                                <a className="btn btn-danger btn-sm" href="#">
-                                  <i className="fas fa-trash"></i>
-                                  Delete
-                                </a>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>1/1/2020.</td>
-                              <td>Mohamed osama el shwiakh</td>
-                              <td>يسيشيسشيشسيشسيشسيشييسشسيخىنثيكثنثبث</td>
+                              <td>I was sick</td>
                               <td className="project-actions text-right">
                                 <a className="btn btn-primary btn-sm" href="#">
                                   <i className="fas fa-folder"></i>

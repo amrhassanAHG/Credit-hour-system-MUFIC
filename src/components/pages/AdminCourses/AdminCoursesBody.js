@@ -100,15 +100,12 @@ export default class AdminCourses extends Component {
           <div className="container-fluid">
             <div className="row mb-2">
               <div className="col-sm-6">
-                <h1 className="m-0 text-dark">Starter Page</h1>
+                <h1 className="m-0 text-dark">Courses</h1>
               </div>
               {/* /.col */}
               <div className="col-sm-6">
                 <ol className="breadcrumb float-sm-right">
-                  <li className="breadcrumb-item">
-                    <a href="#">Home</a>
-                  </li>
-                  <li className="breadcrumb-item active">Starter Page</li>
+                  <li className="breadcrumb-item active">Courses</li>
                 </ol>
               </div>
               {/* /.col */}
@@ -177,7 +174,7 @@ export default class AdminCourses extends Component {
                       </tbody>
                     </table>
                   </div>
-                  {/* /.card-body */}
+                  {/* /.card-footer */}
                   <div className="card-footer clearfix">
                     <ul className="pagination pagination-sm m-0 float-right">
                       <Pagination
@@ -190,9 +187,9 @@ export default class AdminCourses extends Component {
                         linkClass="page-link"
                       />
                     </ul>
-                  </div>{" "}
-                </div>{" "}
-              </div>{" "}
+                  </div>
+                </div>
+              </div>
             </div>
             <div className="card card-primary">
               <div className="card-header">

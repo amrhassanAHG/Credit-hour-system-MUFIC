@@ -3,10 +3,10 @@ import NavSideBar from '../../layout/NavSideBar'
 import RegistrationProvementBody from './RegistrationProvementBody'
 import Footer from '../../layout/Footer'
 
-const RegisterationProvement = ()=>(
+const RegisterationProvement = (props)=>(
     <div>
         <NavSideBar>
-            <RegistrationProvementBody />
+            <RegistrationProvementBody history={props.history} />
         </NavSideBar>
         <Footer />
     </div>

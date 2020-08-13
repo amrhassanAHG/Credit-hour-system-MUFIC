@@ -3,8 +3,7 @@ import { NavLink } from "react-router-dom";
 import userImage from "../../assets/user2-160x160.jpg";
 import adminLteLogo from "../../assets/logo.jpg";
 import AuthService from "../../services/auth.service";
-import {studentRole, lecturerRole, adminRole} from '../../staticData'
-//import './SideBar.css'
+import { studentRole, lecturerRole, adminRole } from "../../staticData";
 
 export default class Sidebar extends Component {
   constructor(props) {
@@ -39,7 +38,7 @@ export default class Sidebar extends Component {
         {/* Sidebar */}
         <div className="sidebar">
           {/* Sidebar user panel (optional) */}
-          {this.state.role === {studentRole} && (
+          {false && (
             <div className="user-panel mt-3 pb-3 mb-3 d-flex">
               <div className="image">
                 <img
@@ -68,24 +67,7 @@ export default class Sidebar extends Component {
               role="menu"
               data-accordion="false"
             >
-              {/* Add icons to the links using the .nav-icon className
-                              with font-awesome or any other icon font library */}
-              <li className="nav-item">
-                <NavLink
-                  to="/"
-                  activeClassName="active"
-                  className="nav-link"
-                  exact={true}
-                >
-                  <i className="nav-icon fa fa-home"></i>
-                  <p>
-                    Home
-                    <span className="right badge badge-danger">New</span>
-                  </p>
-                </NavLink>
-              </li>
-
-              {this.state.role === studentRole && (
+              {false && (
                 <ul className="nav nav-pills nav-sidebar flex-column">
                   <li className="nav-header">Student</li>
                   <li className="nav-item">
@@ -206,17 +188,22 @@ export default class Sidebar extends Component {
 
               {this.state.role === lecturerRole && (
                 <ul className="nav nav-pills nav-sidebar flex-column">
-                  <li className="nav-header">Lecturer</li>
-
                   <li className="nav-item">
                     <NavLink
-                      to="/student-marks"
+                      to="/write-post"
+                      onClick={
+                        () => {
+                          setTimeout(() => {
+                             window.location.reload();   
+                          }, 0.1);
+                        }
+                      }
                       activeClassName="active"
                       className="nav-link"
                     >
-                      <i className="nav-icon fa fa-edit"></i>
+                      <i className="nav-icon fa fa-pen"></i>
                       <p>
-                        Student marks
+                        Write Post
                         {/* <span className="right badge badge-danger">New</span> */}
                       </p>
                     </NavLink>
@@ -252,20 +239,6 @@ export default class Sidebar extends Component {
 
                   <li className="nav-item">
                     <NavLink
-                      to="/write-post"
-                      activeClassName="active"
-                      className="nav-link"
-                    >
-                      <i className="nav-icon fa fa-pen"></i>
-                      <p>
-                        Write Post
-                        {/* <span className="right badge badge-danger">New</span> */}
-                      </p>
-                    </NavLink>
-                  </li>
-
-                  <li className="nav-item">
-                    <NavLink
                       to="/view-excuses"
                       activeClassName="active"
                       className="nav-link"
@@ -282,36 +255,6 @@ export default class Sidebar extends Component {
 
               {this.state.role === adminRole && (
                 <ul className="nav nav-pills nav-sidebar flex-column">
-                  <li className="nav-header">Administrator</li>
-
-                  <li className="nav-item">
-                    <NavLink
-                      to="/dashboard"
-                      activeClassName="active"
-                      className="nav-link"
-                    >
-                      <i className="nav-icon fas fa-tachometer-alt"></i>
-                      <p>
-                        DashBoard
-                        {/* <span className="right badge badge-danger">New</span> */}
-                      </p>
-                    </NavLink>
-                  </li>
-
-                  <li className="nav-item">
-                    <NavLink
-                      to="/terms"
-                      activeClassName="active"
-                      className="nav-link"
-                    >
-                      <i className="nav-icon fas fa-check"></i>
-                      <p>
-                        Terms
-                        {/* <span className="right badge badge-danger">New</span> */}
-                      </p>
-                    </NavLink>
-                  </li>
-
                   <li className="nav-item">
                     <NavLink
                       to="/write-post"
@@ -335,6 +278,20 @@ export default class Sidebar extends Component {
 
                   <li className="nav-item">
                     <NavLink
+                      to="/terms"
+                      activeClassName="active"
+                      className="nav-link"
+                    >
+                      <i className="nav-icon fas fa-check"></i>
+                      <p>
+                        Terms
+                        {/* <span className="right badge badge-danger">New</span> */}
+                      </p>
+                    </NavLink>
+                  </li>
+
+                  <li className="nav-item">
+                    <NavLink  
                       to="/students"
                       activeClassName="active"
                       className="nav-link"
@@ -357,17 +314,6 @@ export default class Sidebar extends Component {
 
                   <li className="nav-item">
                     <NavLink
-                      to="/sections"
-                      activeClassName="active"
-                      className="nav-link"
-                    >
-                      <i className="nav-icon fa fa-school"></i>
-                      <p>Sections</p>
-                    </NavLink>
-                  </li>
-
-                  <li className="nav-item">
-                    <NavLink
                       to="/payments"
                       activeClassName="active"
                       className="nav-link"
@@ -385,17 +331,6 @@ export default class Sidebar extends Component {
                     >
                       <i className="nav-icon fa fa-check"></i>
                       <p>Registeration provement</p>
-                    </NavLink>
-                  </li>
-
-                  <li className="nav-item">
-                    <NavLink
-                      to="/guides"
-                      activeClassName="active"
-                      className="nav-link"
-                    >
-                      <i className="nav-icon fa fa-hands-helping"></i>
-                      <p>Guides</p>
                     </NavLink>
                   </li>
 

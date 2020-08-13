@@ -15,15 +15,12 @@ export default class PaymentsBody extends Component {
           <div className="container-fluid">
             <div className="row mb-2">
               <div className="col-sm-6">
-                <h1 className="m-0 text-dark">Payment</h1>
+                <h1 className="m-0 text-dark">Payments</h1>
               </div>
               {/* /.col */}
               <div className="col-sm-6">
                 <ol className="breadcrumb float-sm-right">
-                  <li className="breadcrumb-item">
-                    <a href="#">dashboard</a>
-                  </li>
-                  <li className="breadcrumb-item active">student sections</li>
+                  <li className="breadcrumb-item active">Payments</li>
                 </ol>
               </div>
               {/* /.col */}
