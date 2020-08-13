@@ -44,6 +44,7 @@ export default class WritePost extends Component {
 
     if(!isValid) return;
 
+    //i used timeout cause the setState upove of adding postBody takes time 
     setTimeout(() => {
         //rest of work send requests
         console.log(this.state);
