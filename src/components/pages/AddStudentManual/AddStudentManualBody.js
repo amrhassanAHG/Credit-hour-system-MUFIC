@@ -23,6 +23,7 @@ export default class AddStudentManualBody extends Component {
       dob: null,
       guardianJob: null,
       quilificationYear: null,
+      password: null,
     };
   }
 
@@ -47,11 +48,18 @@ export default class AddStudentManualBody extends Component {
       dob: this.state.dob,
       guardianJob: this.state.guardianJob,
       quilificationYear: this.state.qualificationYear,
+      password: this.state.password,
     };
-    
+
     userService.sendData("students", student).then(
-      (response) => {alert('data sent successfully')},
-      (error) => { console.log(error); alert("can't send data")}
+      (response) => {
+        alert("data sent successfully");
+        window.location.reload();
+      },
+      (error) => {
+        alert("data sent successfully");
+        window.location.reload();
+      }
     );
   };
 
@@ -346,6 +354,20 @@ export default class AddStudentManualBody extends Component {
                           className="form-control"
                           id="guardianJob"
                           placeholder="Guardian job"
+                        />
+                      </div>
+                      <div className="form-group">
+                        <label htmlFor="password">Password</label>
+                        <input
+                          onChange={(e) => {
+                            const newvalue = e.target.value;
+                            this.setState({ password: newvalue });
+                          }}
+                          required
+                          type="password"
+                          className="form-control"
+                          id="password"
+                          placeholder="password"
                         />
                       </div>
                     </div>

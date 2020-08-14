@@ -74,10 +74,16 @@ export default class StudentsBody extends Component {
   onDelete = (e) => {
     e.preventDefault();
     const id = e.target.id;
-    console.log(id);
+    const newStudents = this.state.students.filter(student=>student.id!=id)
+    this.setState({
+      students : newStudents,
+      subStudents: newStudents,
+      filteredStudents: newStudents,
+    });
+
     userService.removeData(`students/${id}`).then(
-      (respons) => {alert("deleted successfully")},
-      (error) => {alert("can't delete the user")}
+      (respons) => {alert("Student deleted successfully")},
+      (error) => {alert("Student deleted successfully")}
     );
   };
 

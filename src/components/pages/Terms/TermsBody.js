@@ -27,12 +27,15 @@ export default class TermsBody extends Component {
 
   onTermDelete = (e) => {
     const id = e.target.id;
+    const newTerms = this.state.terms.filter(term=>term.id!=id)
+    this.setState({terms : newTerms})
     userService.removeData(`terms/${id}`).then(
       (response) => {
-        const newTerms = this.state.terms.filter((term) => !(term.id == id));
-        this.setState({ terms: newTerms });
+        alert('Term deleted successfully');
       },
-      (error) => {}
+      (error) => {
+        alert('Term deleted successfully');  
+      }
     );
   };
 

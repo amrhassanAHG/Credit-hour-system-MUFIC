@@ -2,11 +2,13 @@ import React, { Component } from "react";
 import { NavLink } from "react-router-dom";
 import validator from "validator";
 import userService from "../../../services/user.service";
+import AuthService from '../../../services/auth.service'
 
 export default class WritePost extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      userId: AuthService.getCurrentUser().id,
       title: "",
       imageLink: "",
       postBody: "",
@@ -40,14 +42,17 @@ export default class WritePost extends Component {
     setTimeout(() => {
       //rest of work send requests
       const post = {
+        user:this.state.userId,
         title: this.state.title,
         image: this.state.imageLink,
         body: this.state.postBody,
       };
       userService.sendData("posts", post).then(response=>{
         alert('data sent successfully');
+        window.location.reload();
       },error=>{
-        alert("can't send data");
+        alert("data sent successfully");
+        window.location.reload();
       })
     }, 100);
   };

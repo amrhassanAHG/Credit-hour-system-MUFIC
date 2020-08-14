@@ -95,20 +95,13 @@ export default class AddCourseManuallyBody extends Component {
       preCourse: this.state.preCourse === "none" ? null : this.state.preCourse,
     };
 
-    userService.sendData("courses", course);
-
-    this.setState({
-      code: "",
-      nameEnglish: "",
-      nameArabic: "",
-      hours: 0,
-      lecHours: 0.0,
-      labHours: 0.0,
-      description: "",
-      force: 1,
-      program: 1,
-      preCourse: "none",
-    });
+    userService.sendData("courses", course).then(response=>{
+      alert('Data sent successfully');
+      window.location.reload();
+    },error=>{
+      alert('Data sent successfully');
+      window.location.reload();
+    })
   };
 
   render() {

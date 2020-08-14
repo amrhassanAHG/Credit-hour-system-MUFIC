@@ -251,7 +251,7 @@ export default class Sidebar extends Component {
                       activeClassName="active"
                       className="nav-link"
                     >
-                      <i className="nav-icon fa fa-glasses"></i>
+                      <i className="nav-icon fa fa-marker"></i>
                       <p>Add Marks</p>
                     </NavLink>
                   </li>

@@ -19,7 +19,7 @@ export default class AdminCourses extends Component {
   }
 
   componentDidMount() {
-    userService.getData('courses').then(
+    userService.getData("courses").then(
       (response) => {
         const coursesData = response.data.courses;
         this.setState({
@@ -41,7 +41,7 @@ export default class AdminCourses extends Component {
       }
     );
 
-    userService.getData('programs').then(
+    userService.getData("programs").then(
       (response) => {
         const programsData = response.data.programs;
         this.setState({
@@ -130,7 +130,9 @@ export default class AdminCourses extends Component {
                         type="submit"
                         className="btn btn-success "
                       >
-                        <Link to='/add-program-manually' className='text-light'>New</Link>
+                        <Link to="/add-program-manually" className="text-light">
+                          New
+                        </Link>
                       </button>
                     </div>
                   </div>
@@ -148,21 +150,23 @@ export default class AdminCourses extends Component {
                       <tbody>
                         {this.state.subPrograms.map((program) => (
                           <tr key={program.id}>
-                            <th scope='col'>{program.id}</th>
+                            <th scope="col">{program.id}</th>
                             <td>{program.nameArabic}</td>
                             <td>{program.hours}</td>
                             <td>{program.underRequirement}</td>
                             <td>
                               <div className="row- center  ">
                                 <button
-                                  style={{ marginRight: 10 }}
-                                  type=" submit"
-                                  className="btn btn-primary"
-                                >
-                                  Edit
-                                </button>
-                                <button
-                                  type="submit"
+                                  onClick={(e) => {
+                                    const newPrograms = this.state.programs.filter(
+                                      (prog) => prog.id != program.id
+                                    );
+                                    this.setState({ programs: newPrograms });
+                                    setTimeout(() => {
+                                      this.handleProgramPageChange(1);
+                                      alert("Program Deleted successfully");
+                                    }, 0.1);
+                                  }}
                                   className="btn btn-danger"
                                 >
                                   Delete
@@ -238,13 +242,18 @@ export default class AdminCourses extends Component {
                           <td>
                             <div className="row- center  ">
                               <button
-                                style={{ marginRight: 10 }}
-                                type=" submit"
-                                className="btn btn-primary"
+                                onClick={(e) => {
+                                  const newCourses = this.state.courses.filter(
+                                    (crs) => crs.code != course.code
+                                  );
+                                  this.setState({ courses: newCourses });
+                                  setTimeout(() => {
+                                    this.handlePageChange(1);
+                                    alert("Course Deleted successfully");
+                                  }, 0.1);
+                                }}
+                                className="btn btn-danger"
                               >
-                                Edit
-                              </button>
-                              <button type="submit" className="btn btn-danger">
                                 Delete
                               </button>
                             </div>

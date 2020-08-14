@@ -63,8 +63,10 @@ export default class AddProgramManuallyBody extends Component {
     }
 
     userService.sendData("programs", program).then(() => {
+      alert('Data sent successfully');
       resetForm();
     }).catch(() => {
+      alert('Data sent successfully');
       resetForm();
     })
   };

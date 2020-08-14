@@ -4,7 +4,44 @@ import { NavLink } from "react-router-dom";
 export default class ViewExcuses extends Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {
+      execuses: [
+        {
+          date: "1/2/2020",
+          studentName: "Mohamed osama el shwiakh",
+          reason: "I was sick",
+        },
+        {
+          date: "2/3/2020",
+          studentName: "Amr Hassan Gad",
+          reason: "I travelled abroad",
+        },
+        {
+          date: "13/4/2020",
+          studentName: "Mustafa khaled",
+          reason: "My sister's mariage",
+        },
+      ],
+
+      subExecuses: [
+        {
+          date: "1/2/2020",
+          studentName: "Mohamed osama el shwiakh",
+          reason: "I was sick",
+        },
+        {
+          date: "2/3/2020",
+          studentName: "Amr Hassan Gad",
+          reason: "I travelled abroad",
+        },
+        {
+          date: "13/4/2020",
+          studentName: "Mustafa khaled",
+          reason: "My sister's mariage",
+        },
+      ],
+      searchValue: "",
+    };
   }
 
   render() {
@@ -42,20 +79,24 @@ export default class ViewExcuses extends Component {
                 <div className="row">
                   <div className="col-12 col-sm-6">
                     <div className="form-group">
-                      <label>select A matirail</label>
-                      <select
-                        defaultValue="java"
-                        className="form-control select2 select2-danger"
-                        data-dropdown-css-class="select2-danger"
-                        style={{ width: "100%" }}
-                      >
-                        <option value="java">java</option>
-                        <option>c++</option>
-                        <option>python</option>
-                        <option>Tennessee</option>
-                        <option>Texas</option>
-                        <option>Washington</option>
-                      </select>
+                      <label htmlFor="searchExecuse">Serach by name :</label>
+                      <input
+                        id="searchExecuse"
+                        value={this.state.searchValue}
+                        onChange={(e) => {
+                          const newValue = e.target.value;
+                          this.setState({ searchValue: newValue });
+                          const newSubExecuses = this.state.execuses.filter(
+                            (execuse) =>
+                              newValue === "" ||
+                              execuse.studentName
+                                .toLowerCase()
+                                .includes(newValue.toLowerCase())
+                          );
+                          this.setState({ subExecuses: newSubExecuses });
+                        }}
+                        className="form-control"
+                      />
                     </div>
                   </div>
                   {/* /.col */}
@@ -74,100 +115,46 @@ export default class ViewExcuses extends Component {
                           <thead>
                             <tr>
                               <th style={{ width: "10px" }}>Date</th>
-
                               <th> Student name </th>
                               <th> Reason </th>
-
-                              <th style={{ width: "100px" }}>view</th>
                               <th style={{ width: "100px" }}>Delete</th>
                             </tr>
                           </thead>
                           <tbody>
-                            <tr>
-                              <td>1/1/2020.</td>
-                              <td>Mohamed osama el shwiakh</td>
-                              <td>I was sick</td>
+                            {this.state.subExecuses.map((execuse, index) => (
+                              <tr key={index}>
+                                <td>{execuse.date}</td>
+                                <td>{execuse.studentName}</td>
+                                <td>{execuse.reason}</td>
 
-                              <td className="project-actions text-right">
-                                <a className="btn btn-primary btn-sm" href="#">
-                                  <i className="fas fa-folder"></i>
-                                  View
-                                </a>
-                              </td>
-                              <td className="project-actions text-right">
-                                <a className="btn btn-danger btn-sm" href="#">
-                                  <i className="fas fa-trash"></i>
-                                  Delete
-                                </a>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>1/1/2020.</td>
-                              <td>Mohamed osama el shwiakh</td>
-                              <td>I was sick</td>
-                              <td className="project-actions text-right">
-                                <a className="btn btn-primary btn-sm" href="#">
-                                  <i className="fas fa-folder"></i>
-                                  View
-                                </a>
-                              </td>
-                              <td className="project-actions text-right">
-                                <a className="btn btn-danger btn-sm" href="#">
-                                  <i className="fas fa-trash"></i>
-                                  Delete
-                                </a>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>1/1/2020.</td>
-                              <td>Mohamed osama el shwiakh</td>
-                              <td>I was sick</td>
-                              <td className="project-actions text-right">
-                                <a className="btn btn-primary btn-sm" href="#">
-                                  <i className="fas fa-folder"></i>
-                                  View
-                                </a>
-                              </td>
-                              <td className="project-actions text-right">
-                                <a className="btn btn-danger btn-sm" href="#">
-                                  <i className="fas fa-trash"></i>
-                                  Delete
-                                </a>
-                              </td>
-                            </tr>
+                                <td className="project-actions text-right">
+                                  <button
+                                    onClick={(e) => {
+                                      const newExecuses = this.state.execuses.filter(
+                                        (ex) =>
+                                          execuse.studentName != ex.studentName
+                                      );
+                                      this.setState({
+                                        execuses: newExecuses,
+                                        subExecuses: newExecuses,
+                                        searchValue: "",
+                                      });
+                                      setTimeout(() => {
+                                        alert("execuse deleted successfully");
+                                      }, 1);
+                                    }}
+                                    className="btn btn-danger btn-sm"
+                                  >
+                                    <i className="fas fa-trash"></i>
+                                    Delete
+                                  </button>
+                                </td>
+                              </tr>
+                            ))}
                           </tbody>
                         </table>
                       </div>
                       {/* /.card-body */}
-                      <div className="card-footer clearfix">
-                        <ul className="pagination pagination-sm m-0 float-right">
-                          <li className="page-item">
-                            <a className="page-link" href="#">
-                              &laquo;
-                            </a>
-                          </li>
-                          <li className="page-item">
-                            <a className="page-link" href="#">
-                              1
-                            </a>
-                          </li>
-                          <li className="page-item">
-                            <a className="page-link" href="#">
-                              2
-                            </a>
-                          </li>
-                          <li className="page-item">
-                            <a className="page-link" href="#">
-                              3
-                            </a>
-                          </li>
-                          <li className="page-item">
-                            <a className="page-link" href="#">
-                              &raquo;
-                            </a>
-                          </li>
-                        </ul>
-                      </div>
                     </div>
                   </div>
                   {/* /.card */}

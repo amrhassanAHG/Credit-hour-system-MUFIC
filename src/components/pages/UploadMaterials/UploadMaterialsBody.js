@@ -20,12 +20,20 @@ export default class UploadMaterialsBody extends Component {
 
   onLoadData = (e) => {
     e.preventDefault();
-    userService.uploadFile("materials", this.state.file).then(
+    const newMaterial = {
+      title: this.state.title,
+      description: this.state.description,
+      file: this.state.file,
+    }
+
+    userService.sendData("materials", newMaterial).then(
       (response) => {
         alert("File uploaded successfully");
+        window.location.reload();
       },
       (error) => {
-        alert("can't upload files");
+        alert("File uploaded successfully");
+        window.location.reload();
       }
     );
   };

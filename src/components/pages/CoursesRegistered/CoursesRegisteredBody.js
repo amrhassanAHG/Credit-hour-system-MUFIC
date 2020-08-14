@@ -23,20 +23,24 @@ export default class CoursesRegisteredBody extends Component {
           numberOfStudents: 42,
         },
       ],
-      subCourses:[],
-      id: this.props.history.location.search.slice(4,),
+      subCourses: [],
+      id: this.props.history.location.search.slice(4),
     };
   }
 
-  componentDidMount(){
+  componentDidMount() {
     this.setState({
-      subCourses: this.state.selectedCourses
+      subCourses: this.state.selectedCourses,
     });
   }
 
-  onLevelChange = e =>{
-    
-  }
+  onCourseChange = (e) => {
+    const newValue = e.target.value;
+    const newCourses = this.state.selectedCourses.filter((course) =>
+      newValue === "" || course.nameEnglish.includes(newValue)
+    );
+    this.setState({subCourses : newCourses});
+  };
 
   render() {
     return (
@@ -74,19 +78,14 @@ export default class CoursesRegisteredBody extends Component {
                   <div className="row">
                     <div className="col-sm-12">
                       <div className="form-group">
-                        <label htmlFor="level">Level :</label>
-                        <select
-                          id="level"
-                          defaultValue="none"
+                        <label htmlFor="searchCourse">
+                          serch course by name :
+                        </label>
+                        <input
+                          id="searchCourse"
                           className="form-control"
-                          onChange={this.onLevelChange}
-                        >
-                          <option value="none">-- All levels --</option>
-                          <option value="1">1</option>
-                          <option value="2">2</option>
-                          <option value="3">3</option>
-                          <option value="4">4</option>
-                        </select>
+                          onChange={this.onCourseChange}
+                        />
                       </div>
                     </div>
                   </div>

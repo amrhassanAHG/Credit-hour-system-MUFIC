@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { NavLink } from "react-router-dom";
-import profileUserImage from "../../../assets/user4-128x128.jpg";
+import profileUserImage from "../../../assets/user1-128x128.jpg";
 
 export default class ProfileBody extends Component {
   constructor(props) {

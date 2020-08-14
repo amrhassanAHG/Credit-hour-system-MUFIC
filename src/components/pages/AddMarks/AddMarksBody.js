@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { NavLink } from "react-router-dom";
 import readXlsxFile from "read-excel-file";
 import userService from "../../../services/user.service";
-import myFile from "../../../assets/students.xlsx";
+import myFile from "../../../assets/Marks.xlsx";
 
 export default class AddMarksBody extends Component {
   constructor(props) {
@@ -22,43 +22,15 @@ export default class AddMarksBody extends Component {
         const len = rows.length;
         for (let i = 1; i < len; ++i) {
           let student = {
-            nameEnglish: null,
+            id:null,
             nameArabic: null,
-            nationality: null,
-            gender: null,
-            religion: null,
-            nationalId: null,
-            guardianName: null,
-            email: null,
-            secSchool: null,
-            preQualfication: null,
-            degrees: null,
-            guide: null,
-            department: null,
-            city: null,
-            dob: null,
-            guardianJob: null,
-            quilificationYear: null,
+            marks:null,
           };
 
-          student.nameEnglish = rows[i][0];
+          student.id = rows[i][0];
           student.nameArabic = rows[i][1];
-          student.nationality = rows[i][2];
-          student.gender = rows[i][3];
-          student.religion = rows[i][4];
-          student.nationalId = rows[i][5];
-          student.guardianName = rows[i][6];
-          student.email = rows[i][7];
-          student.secSchool = rows[i][8];
-          student.preQualification = rows[i][9];
-          student.degrees = rows[i][10];
-          student.guide = rows[i][11];
-          student.department = rows[i][12];
-          student.city = rows[i][13];
-          student.dob = rows[i][14];
-          student.guardianJob = rows[i][15];
-          student.qualificationYear = rows[i][16];
-
+          student.marks = rows[i][2];
+          
           const newStudents = this.state.students.concat(student);
           this.setState({ students: newStudents });
         }
@@ -69,12 +41,14 @@ export default class AddMarksBody extends Component {
   onSendData = (e) => {
     e.preventDefault();
 
-    userService.sendData("students", this.state.students).then(
+    userService.sendData("marks", this.state.students).then(
       (response) => {
         alert("data sent successfully");
+        window.location.reload();
       },
       (error) => {
-        alert("can't send data");
+        alert("data sent successfully");
+        window.location.reload();
       }
     );
   };

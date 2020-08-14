@@ -39,6 +39,7 @@ export default class AddStudentSheetBody extends Component {
             dob: null,
             guardianJob: null,
             quilificationYear: null,
+            password: null,
           };
 
           student.nameEnglish = rows[i][0];
@@ -58,6 +59,7 @@ export default class AddStudentSheetBody extends Component {
           student.dob = rows[i][14];
           student.guardianJob = rows[i][15];
           student.qualificationYear = rows[i][16];
+          student.password = rows[i][17];
 
           const newStudents = this.state.students.concat(student);
           this.setState({ students: newStudents });
