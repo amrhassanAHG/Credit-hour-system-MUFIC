@@ -1,23 +1,40 @@
 import React, { Component } from "react";
 import { NavLink } from "react-router-dom";
+import userService from "../../../services/user.service";
 
 export default class TermsBody extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      terms:[{
-        nameArabic: 'الترم الاول',
-        nameEnglish: 'First term',
-        startDate: '1/10/2018',
-        endDate: '15/1/2019'
-      },{
-        nameArabic: 'الترم التاني',
-        nameEnglish: 'Second term',
-        startDate: '23/2/2019',
-        endDate: '10/6/2019'
-      }]
+      terms: [
+        {
+          id: 1,
+          nameArabic: "الترم الاول",
+          nameEnglish: "First term",
+          startDate: "1/10/2018",
+          endDate: "15/1/2019",
+        },
+        {
+          id: 2,
+          nameArabic: "الترم التاني",
+          nameEnglish: "Second term",
+          startDate: "23/2/2019",
+          endDate: "10/6/2019",
+        },
+      ],
     };
   }
+
+  onTermDelete = (e) => {
+    const id = e.target.id;
+    userService.removeData(`terms/${id}`).then(
+      (response) => {
+        const newTerms = this.state.terms.filter((term) => !(term.id == id));
+        this.setState({ terms: newTerms });
+      },
+      (error) => {}
+    );
+  };
 
   render() {
     return (
@@ -83,20 +100,10 @@ export default class TermsBody extends Component {
                           <td>
                             <div className="row- center  ">
                               <button
-                                style={{ marginRight: 10 }}
-                                type=" submit"
-                                className="btn btn-primary"
+                                id={term.id.toString()}
+                                onClick={this.onTermDelete}
+                                className="btn btn-danger"
                               >
-                                Edit
-                              </button>
-                              <button
-                                style={{ marginRight: 10 }}
-                                type="submit"
-                                className="btn btn-success"
-                              >
-                                Clone
-                              </button>
-                              <button type="submit" className="btn btn-danger">
                                 Delete
                               </button>
                             </div>
@@ -107,35 +114,6 @@ export default class TermsBody extends Component {
                   </table>
                 </div>
                 {/* /.card-body */}
-                <div className="card-footer clearfix">
-                  <ul className="pagination pagination-sm m-0 float-right">
-                    <li className="page-item">
-                      <a className="page-link" href="#">
-                        «
-                      </a>
-                    </li>
-                    <li className="page-item">
-                      <a className="page-link" href="#">
-                        1
-                      </a>
-                    </li>
-                    <li className="page-item">
-                      <a className="page-link" href="#">
-                        2
-                      </a>
-                    </li>
-                    <li className="page-item">
-                      <a className="page-link" href="#">
-                        3
-                      </a>
-                    </li>
-                    <li className="page-item">
-                      <a className="page-link" href="#">
-                        »
-                      </a>
-                    </li>
-                  </ul>
-                </div>
               </div>
             </div>
           </div>

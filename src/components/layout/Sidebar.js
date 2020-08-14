@@ -69,7 +69,6 @@ export default class Sidebar extends Component {
             >
               {false && (
                 <ul className="nav nav-pills nav-sidebar flex-column">
-                  <li className="nav-header">Student</li>
                   <li className="nav-item">
                     <NavLink
                       to="/registercourses"
@@ -190,14 +189,12 @@ export default class Sidebar extends Component {
                 <ul className="nav nav-pills nav-sidebar flex-column">
                   <li className="nav-item">
                     <NavLink
+                      onClick={(e) => {
+                        setTimeout(() => {
+                          window.location.reload();
+                        }, 1);
+                      }}
                       to="/write-post"
-                      onClick={
-                        () => {
-                          setTimeout(() => {
-                             window.location.reload();   
-                          }, 0.1);
-                        }
-                      }
                       activeClassName="active"
                       className="nav-link"
                     >
@@ -244,10 +241,18 @@ export default class Sidebar extends Component {
                       className="nav-link"
                     >
                       <i className="nav-icon fa fa-glasses"></i>
-                      <p>
-                        View Excuses
-                        <span className="right badge badge-danger">New</span>
-                      </p>
+                      <p>View Excuses</p>
+                    </NavLink>
+                  </li>
+
+                  <li className="nav-item">
+                    <NavLink
+                      to="/add-marks"
+                      activeClassName="active"
+                      className="nav-link"
+                    >
+                      <i className="nav-icon fa fa-glasses"></i>
+                      <p>Add Marks</p>
                     </NavLink>
                   </li>
                 </ul>
@@ -257,14 +262,12 @@ export default class Sidebar extends Component {
                 <ul className="nav nav-pills nav-sidebar flex-column">
                   <li className="nav-item">
                     <NavLink
+                      onClick={(e) => {
+                        setTimeout(() => {
+                          window.location.reload();
+                        }, 1);
+                      }}
                       to="/write-post"
-                      onClick={
-                        () => {
-                          setTimeout(() => {
-                             window.location.reload();   
-                          }, 0.1);
-                        }
-                      }
                       activeClassName="active"
                       className="nav-link"
                     >
@@ -291,7 +294,7 @@ export default class Sidebar extends Component {
                   </li>
 
                   <li className="nav-item">
-                    <NavLink  
+                    <NavLink
                       to="/students"
                       activeClassName="active"
                       className="nav-link"

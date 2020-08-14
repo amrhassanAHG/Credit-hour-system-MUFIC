@@ -4,7 +4,7 @@ import readXlsxFile from "read-excel-file";
 import userService from "../../../services/user.service";
 import myFile from "../../../assets/students.xlsx";
 
-export default class AddStudentSheetBody extends Component {
+export default class AddMarksBody extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -87,17 +87,12 @@ export default class AddStudentSheetBody extends Component {
           <div className="container-fluid">
             <div className="row mb-2">
               <div className="col-sm-6">
-                <h1 className="m-0 text-dark">Add student by sheet</h1>
+                <h1 className="m-0 text-dark">Add students Marks</h1>
               </div>
               {/* /.col */}
               <div className="col-sm-6">
                 <ol className="breadcrumb float-sm-right">
-                  <li className="breadcrumb-item">
-                    <NavLink to="/add-student" exact={true}>
-                      Add student
-                    </NavLink>
-                  </li>
-                  <li className="breadcrumb-item">Add student by sheet</li>
+                  <li className="breadcrumb-item">Add students Marks</li>
                 </ol>
               </div>
               {/* /.col */}
@@ -113,7 +108,7 @@ export default class AddStudentSheetBody extends Component {
           <div className="container-fluid">
             <div className="card card-primary">
               <div className="card-header">
-                <h3 className="card-title">Add students by excel sheet</h3>
+                <h3 className="card-title">Add marks sheet</h3>
               </div>
               {/* form start */}
               <form>
@@ -125,7 +120,7 @@ export default class AddStudentSheetBody extends Component {
 
                     <div className="info-box-content">
                       <span className="info-box-text">
-                        Download this excel sheet format to populate student
+                        Download this excel sheet format to populate students marks
                       </span>
                       <div className="form-group">
                         <label htmlFor="exampleInputFile">File download</label>

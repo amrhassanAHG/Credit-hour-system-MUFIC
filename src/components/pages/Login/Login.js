@@ -1,11 +1,7 @@
 import React, { Component } from "react";
 import { NavLink } from "react-router-dom";
 import AuthService from "../../../services/auth.service";
-import Form from "react-validation/build/form";
-import Input from "react-validation/build/input";
-import { isEmail } from "validator";
 import "./Login.css";
-
 
 export default class Page extends Component {
   constructor(props) {
@@ -19,30 +15,30 @@ export default class Page extends Component {
     const email = document.getElementById("login-email").value;
     const pass = document.getElementById("login-password").value;
     const message = document.getElementById("error-message");
+    const rememberMe = document.getElementById("remember-me");
+    let days = 1;
+    if (rememberMe.checked) days = 10;
 
     if (email === "" || pass === "") {
       message.innerHTML = "Please Enter your email and password";
     } else {
-      /*if (!isEmail(email)) {
-        message.innerHTML = "enter a valid email";
-      } else {*/
-      const userData = AuthService.login(email, pass, 7);
-      
-      Promise.resolve(userData).then((value) => {
-        if(!value) {
+      const userData = AuthService.login(email, pass, days).then(
+        (response) => {
+          if (response.accessToken) {
+            this.props.history.push("/");
+            window.location.reload();
+          }
+        },
+        (error) => {
           message.innerHTML = "your email or password might be wrong";
-        }else if (value && value.accessToken) {
-          this.props.history.push("/");
-          window.location.reload();
         }
-      });
-      //}
+      );
     }
   };
 
   render() {
-    if(AuthService.getRole()){
-      this.props.history.push('/');
+    if (AuthService.getRole()) {
+      this.props.history.push("/");
     }
 
     return (
@@ -64,7 +60,7 @@ export default class Page extends Component {
                     id="login-email"
                     type="text"
                     className="form-control"
-                    placeholder="Email"
+                    placeholder="Email or username"
                   />
                   <div className="input-group-append">
                     <div className="input-group-text">
@@ -88,16 +84,13 @@ export default class Page extends Component {
                 <div className="row">
                   <div className="col-8">
                     <div className="icheck-primary">
-                      <input type="checkbox" id="remember" />
-                      <label htmlFor="remember">Remember Me</label>
+                      <input type="checkbox" id="remember-me" />
+                      <label htmlFor="remember-me">Remember Me</label>
                     </div>
                   </div>
                   {/* /.col */}
                   <div className="col-4">
-                    <button
-                      type="submit"
-                      className="btn btn-primary btn-block"
-                    >
+                    <button type="submit" className="btn btn-primary btn-block">
                       Sign In
                     </button>
                   </div>
@@ -105,9 +98,9 @@ export default class Page extends Component {
                 </div>
               </form>
               <div id="error-message" style={{ color: "red" }}></div>
-              <p className="mb-1">
+              {/*<p className="mb-1">
                 <a href="/forget-password">I forgot my password</a>
-              </p>
+              </p>*/}
             </div>
             {/* /.login-card-body */}
           </div>

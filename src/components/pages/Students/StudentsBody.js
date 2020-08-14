@@ -8,8 +8,9 @@ export default class StudentsBody extends Component {
     super(props);
     this.state = {
       students: [],
+      filteredStudents: [],
       subStudents: [],
-      activePage:1,
+      activePage: 1,
     };
   }
 
@@ -17,7 +18,10 @@ export default class StudentsBody extends Component {
     userService.getData("students").then(
       (response) => {
         const studentsData = response.data.students;
-        this.setState({ students: studentsData });
+        this.setState({
+          students: studentsData,
+          filteredStudents: studentsData,
+        });
 
         const newSubStudents = studentsData.slice(
           0,
@@ -28,26 +32,54 @@ export default class StudentsBody extends Component {
         });
       },
       (error) => {
-        this.setState({ students: [] });
+        this.setState({ students: [], filteredStudents: [] });
       }
     );
   }
 
-  handlePageChange = pageNumber => {
+  handlePageChange = (pageNumber) => {
     this.setState({ activePage: pageNumber });
     const start = (pageNumber - 1) * 5;
-    const len = this.state.students.length;
+    const len = this.state.filteredStudents.length;
 
-    const newSubStudents = this.state.students.slice(
+    const newSubStudents = this.state.filteredStudents.slice(
       start,
       Math.min(len, start + 5)
     );
     this.setState({
       subStudents: newSubStudents,
     });
-  }
+  };
 
-  onLevelChange = (e) => {};
+  showFilteredStudents = (e) => {
+    e.preventDefault();
+    const newValue = document.getElementById("filterNames").value;
+    if (newValue === "") {
+      this.setState({ filteredStudents: this.state.students });
+    } else {
+      const newFilteredStudents = this.state.students.filter(
+        (student) =>
+          student.nameArabic.includes(newValue) ||
+          student.nameEnglish.includes(newValue)
+      );
+
+      this.setState({ filteredStudents: newFilteredStudents });
+    }
+
+    setTimeout(() => {
+      this.handlePageChange(1);
+    }, 50);
+  };
+
+  onDelete = (e) => {
+    e.preventDefault();
+    const id = e.target.id;
+    console.log(id);
+    userService.removeData(`students/${id}`).then(
+      (respons) => {alert("deleted successfully")},
+      (error) => {alert("can't delete the user")}
+    );
+  };
 
   render() {
     return (
@@ -87,20 +119,16 @@ export default class StudentsBody extends Component {
                     <div className="col-sm-9">
                       {/* select */}
                       <div className="form-group">
-                        <select
-                          onChange={this.onLevelChange}
+                        <input
+                          placeholder="search by name"
+                          id="filterNames"
                           className="form-control"
-                        >
-                          <option value="0">-- Select Level --</option>
-                          <option value="1">1</option>
-                          <option value="2">2</option>
-                          <option value="3">3</option>
-                          <option value="4">4</option>
-                        </select>
+                        />
                       </div>
                     </div>
                     <div className="center">
                       <button
+                        onClick={this.showFilteredStudents}
                         style={{ width: "100px" }}
                         className="btn btn-primary"
                       >
@@ -134,14 +162,14 @@ export default class StudentsBody extends Component {
                         <td>{student.nationality}</td>
                         <td>{student.gender}</td>
                         <td className="project-actions text-center">
-                          <a className="btn btn-info btn-sm" href="/students">
-                            <i className="fas fa-pencil-alt"></i>
-                            Edit
-                          </a>
-                          <a className="btn btn-danger btn-sm" href="/students">
+                          <button
+                            onClick={this.onDelete}
+                            className="btn btn-danger btn-sm"
+                            id={student.id.toString()}
+                          >
                             <i className="fas fa-trash"></i>
                             Delete
-                          </a>
+                          </button>
                         </td>
                       </tr>
                     ))}
@@ -154,7 +182,7 @@ export default class StudentsBody extends Component {
                   <Pagination
                     activePage={this.state.activePage}
                     itemsCountPerPage={5}
-                    totalItemsCount={this.state.students.length}
+                    totalItemsCount={this.state.filteredStudents.length}
                     pageRangeDisplayed={5}
                     onChange={this.handlePageChange}
                     itemClass="page-item"

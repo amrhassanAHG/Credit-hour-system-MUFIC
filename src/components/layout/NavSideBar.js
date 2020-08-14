@@ -1,12 +1,11 @@
 import React, { Component } from "react";
 import { NavLink } from "react-router-dom";
-import userAvatar from "../../assets/user1-128x128.jpg";
-import userAvatar2 from "../../assets/user8-128x128.jpg";
-import userAvatar3 from "../../assets/user3-128x128.jpg";
-import userImage from "../../assets/user2-160x160.jpg";
 import Sidebar from "./Sidebar";
-import ControlSidebar from "./ControlSidebar";
 import AuthService from "../../services/auth.service";
+import adminImage from "../../assets/admin.png";
+import lecturerImage from "../../assets/lecturer.png";
+
+/*AuthService.getCurrentUser().imageUrl;*/
 
 export default class NavSideBar extends Component {
   constructor(props) {
@@ -49,7 +48,11 @@ export default class NavSideBar extends Component {
                 <a href="#" className="dropdown-toggle" data-toggle="dropdown">
                   {/* The user image in the navbar*/}
                   <img
-                    src={userImage}
+                    src={
+                      this.state.role === "ROLE_ADMIN"
+                        ? adminImage
+                        : lecturerImage
+                    }
                     className="user-image"
                     alt="User Image"
                   />
@@ -62,7 +65,11 @@ export default class NavSideBar extends Component {
                   {/* The user image in the menu */}
                   <li className="dropdown-header">
                     <img
-                      src={userImage}
+                      src={
+                        this.state.role === "ROLE_ADMIN"
+                          ? adminImage
+                          : lecturerImage
+                      }
                       className="img-circle"
                       alt="User Image"
                     />

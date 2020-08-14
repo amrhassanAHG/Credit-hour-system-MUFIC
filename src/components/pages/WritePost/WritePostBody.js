@@ -1,59 +1,74 @@
 import React, { Component } from "react";
 import { NavLink } from "react-router-dom";
-import validator from 'validator';
+import validator from "validator";
+import userService from "../../../services/user.service";
+
 export default class WritePost extends Component {
   constructor(props) {
     super(props);
     this.state = {
-       title: '',
-       imageLink: '',
-       postBody: ''
+      title: "",
+      imageLink: "",
+      postBody: "",
     };
   }
 
-  componentDidMount = () => {
-
-  };
+  componentDidMount = () => {};
 
   submit = (e) => {
     e.preventDefault();
-    let isValid = true ;
+    let isValid = true;
     const inputs = document.getElementsByClassName("writePost-item");
-    for(let i = 0 ;  i < inputs.length; i++){
-       if(validator.isEmpty(inputs[i].value)){
-          isValid = false ;
-          inputs[i].classList.add("is-invalid");
-       } else inputs[i].classList.remove("is-invalid");
+    for (let i = 0; i < inputs.length; i++) {
+      if (validator.isEmpty(inputs[i].value)) {
+        isValid = false;
+        inputs[i].classList.add("is-invalid");
+      } else inputs[i].classList.remove("is-invalid");
     }
 
+<<<<<<< HEAD
     const postWrite = document.getElementsByClassName("note-editing-area")[0]
+=======
+    const postWrite = document.getElementsByClassName("note-editing-area")[0];
+>>>>>>> d9d277f164b37b724ec9f662dff2acf25a9b7259
     this.setState((prev) => {
       return {
         ...prev,
-        postBody: postWrite.innerHTML
-      }
+        postBody: postWrite.innerHTML,
+      };
     });
 
-    if(!isValid) return;
+    if (!isValid) return;
 
-    //i used timeout cause the setState upove of adding postBody takes time 
+    //i used timeout cause the setState upove of adding postBody takes time
     setTimeout(() => {
-        //rest of work send requests
-        console.log(this.state);
-    }, 500)
-  }
+      //rest of work send requests
+      const post = {
+        title: this.state.title,
+        image: this.state.imageLink,
+        body: this.state.postBody,
+      };
+      userService.sendData("posts", post).then(response=>{
+        alert('data sent successfully');
+      },error=>{
+        alert("can't send data");
+      })
+    }, 100);
+  };
 
   uploadImage = (e) => {
     e.persist();
-    if(!validator.isEmpty(e.target.value)) e.target.classList.remove("is-invalid");
+    if (!validator.isEmpty(e.target.value))
+      e.target.classList.remove("is-invalid");
     //  const image = document.getElementById("previewImage");
     const imageUrl = URL.createObjectURL(e.target.files[0]);
+    document.getElementById("fileName").innerHTML = e.target.files[0].name;
     this.setState(() => {
       return {
-        imageLink: imageUrl
-      }
+        imageLink: imageUrl,
+      };
     });
-  } 
+  };
 
   render() {
     return (
@@ -86,39 +101,54 @@ export default class WritePost extends Component {
               <div className="card-header">
                 <h3 className="card-title">Write Post</h3>
               </div>
-              <form className="form form-group" role="form" onSubmit={this.submit}>
+              <form
+                className="form form-group"
+                role="form"
+                onSubmit={this.submit}
+              >
                 <div className="card-body">
                   <div className="mb-3">
-                    <div className='row'>
-                       {/* this image is for testing */}
-                       {/* <div className='col'>
+                    <div className="row">
+                      {/* this image is for testing */}
+                      {/* <div className='col'>
                           <img src='' alt='preview' id="previewImage"/>
                        </div> */}
-                       <div className='col'>
-                          <input type='tel' className='form-control writePost-item' placeholder='Title' 
+                      <div className="col">
+                        <input
+                          type="tel"
+                          className="form-control writePost-item"
+                          placeholder="Title"
                           onChange={(e) => {
                             e.persist(); // for unknown reson
-                            if(!validator.isEmpty(e.target.value)) e.target.classList.remove("is-invalid");
+                            if (!validator.isEmpty(e.target.value))
+                              e.target.classList.remove("is-invalid");
                             this.setState(() => {
                               return {
-                                title: e.target.value
-                              }
+                                title: e.target.value,
+                              };
                             });
-                          }}/>
-                       </div>
-                       <div className='col'>
-                          <div class="custom-file">
-                              <input 
-                                  onChange = {this.uploadImage}
-                                  type="file" 
-                                  accept=".jpg, .jpeg, .png"
-                                  className="custom-file-input  writePost-item" 
-                                  id="inputGroupFile01" 
-                                  alt=''
-                              />
-                              <label className="custom-file-label" htmlFor="inputGroupFile01">Choose image</label>
-                          </div>  
-                       </div>                     
+                          }}
+                        />
+                      </div>
+                      <div className="col">
+                        <div className="custom-file">
+                          <input
+                            onChange={this.uploadImage}
+                            type="file"
+                            accept=".jpg, .jpeg, .png"
+                            className="custom-file-input  writePost-item"
+                            id="inputGroupFile01"
+                            alt=""
+                          />
+                          <label
+                            className="custom-file-label"
+                            htmlFor="inputGroupFile01"
+                            id="fileName"
+                          >
+                            Choose image
+                          </label>
+                        </div>
+                      </div>
                     </div>
                     <br />
                     <textarea

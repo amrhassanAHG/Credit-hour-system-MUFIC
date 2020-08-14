@@ -36,7 +36,7 @@ export default class AddStudentBody extends Component {
           <div className="container-fluid">
             <div className="card card-primary">
               <div className="card-header">
-                <h3 className="card-title">Courses Info</h3>
+                <h3 className="card-title">Add students</h3>
               </div>
               <div className="card-body">
                 <div className="row">

@@ -34,19 +34,19 @@ export default class AddTermBody extends Component {
 
       availableCourses: [
         {
-          code: "120",
-          name: "Java",
-          doctor: "Hamdi",
+          code:"BCS213",
+          nameEnglish: "Programming-2",
+          nameArabic: "برمجة – ٢",
         },
         {
-          code: "130",
-          name: "Python",
-          doctor: "Amira Ibrahim",
+          code: "BCS241",
+          nameEnglish: "Operating Systems",
+          nameArabic: "نظم التشغیل",
         },
         {
-          code: "140",
-          name: "Distributed systems",
-          doctor: "Anas",
+          code: "BCS214",
+          nameEnglish: "Data structures",
+          nameArabic: "ھیاكل بیانات",
         },
       ],
 
@@ -209,6 +209,7 @@ export default class AddTermBody extends Component {
               {/* /.col */}
               <div className="col-sm-6">
                 <ol className="breadcrumb float-sm-right">
+
                   <li className="breadcrumb-item">
                     <NavLink to="/terms">Terms</NavLink>
                   </li>
@@ -398,8 +399,8 @@ export default class AddTermBody extends Component {
                       <thead>
                         <tr>
                           <th style={{ width: 10 }}>Code</th>
-                          <th>Course name</th>
-                          <th>Course Doctor</th>
+                          <th>Course English name</th>
+                          <th>Course Arabic name</th>
                           <th style={{ width: 40 }}>Add</th>
                         </tr>
                       </thead>
@@ -407,8 +408,8 @@ export default class AddTermBody extends Component {
                         {this.state.availableCourses.map((course) => (
                           <tr key={course.code}>
                             <td>{course.code}</td>
-                            <td>{course.name}</td>
-                            <td>{course.doctor}</td>
+                            <td>{course.nameEnglish}</td>
+                            <td>{course.nameArabic}</td>
                             <td>
                               <button
                                 type="button"
