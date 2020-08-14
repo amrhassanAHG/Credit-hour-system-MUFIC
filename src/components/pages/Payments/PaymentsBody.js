@@ -35,20 +35,13 @@ export default class PaymentsBody extends Component {
            Term: ''
          }
        ],
+       id: 0,
        studentName:'',
        Term: '',
        totalHour: 0,
        totalPrice: 0,
        voucher: 0,
-       list: [
-         {
-           id: 1,
-           voucher: 18736376733,
-           price: 0,
-           term: 'First',
-           date: new Date().toDateString()
-         }
-       ],
+       list: [],
        studentTotalPrice: 0
     };
   }
@@ -68,10 +61,12 @@ export default class PaymentsBody extends Component {
     if(isFound.length > 0){
       //send request to get total hour and total price for this student
       console.log('found');
+      const hourList = [12, 15, 18];
       this.setState(() => {
+        const hour = hourList[parseInt(Math.random() * 3)] ;
         return {
-          totalHour: parseInt(Math.random() * 10 + 120),
-          totalPrice: parseInt(Math.random() * 100 + 300)
+          totalHour: hour,
+          totalPrice: hour * 300
         }
       });
     } else {
@@ -108,8 +103,9 @@ export default class PaymentsBody extends Component {
 
     this.setState((prevState) => {
        return {
+         id: prevState.id + 1,
          list: prevState.list.concat({
-            id:  parseInt(Math.random() * 100),
+            id: prevState.id + 1,
             voucher: this.state.voucher,
             price: this.state.totalPrice,
             term: this.state.Term,
@@ -199,9 +195,9 @@ export default class PaymentsBody extends Component {
                         }}
                         >
                           <option value="none">-- Select Term --</option>
-                          <option>First</option>
-                          <option>Second</option>
-                          <option>Summer</option>
+                          <option>First term 2020</option>
+                          <option>Second term 2020</option>
+                          <option>Summer term 2020</option>
                         </select>
                       </div>
                       <table className="table table-bordered">
