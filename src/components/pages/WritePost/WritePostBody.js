@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { NavLink } from "react-router-dom";
 import validator from "validator";
-import userService from '../../../services/user.service'
+import userService from "../../../services/user.service";
 
 export default class WritePost extends Component {
   constructor(props) {
@@ -26,15 +26,30 @@ export default class WritePost extends Component {
       } else inputs[i].classList.remove("is-invalid");
     }
 
+    const postWrite = document.getElementsByClassName("note-editing-area")[0];
+    this.setState((prev) => {
+      return {
+        ...prev,
+        postBody: postWrite.innerHTML,
+      };
+    });
+
     if (!isValid) return;
 
-    //rest of work send requests
-    const post={
-      title: this.state.title,
-      image: this.state.imageLink,
-      body: this.state.postBody
-    }
-    userService.sendData('posts', post);
+    //i used timeout cause the setState upove of adding postBody takes time
+    setTimeout(() => {
+      //rest of work send requests
+      const post = {
+        title: this.state.title,
+        image: this.state.imageLink,
+        body: this.state.postBody,
+      };
+      userService.sendData("posts", post).then(response=>{
+        alert('data sent successfully');
+      },error=>{
+        alert("can't send data");
+      })
+    }, 100);
   };
 
   uploadImage = (e) => {
@@ -43,6 +58,7 @@ export default class WritePost extends Component {
       e.target.classList.remove("is-invalid");
     //  const image = document.getElementById("previewImage");
     const imageUrl = URL.createObjectURL(e.target.files[0]);
+    document.getElementById("fileName").innerHTML = e.target.files[0].name;
     this.setState(() => {
       return {
         imageLink: imageUrl,
@@ -123,6 +139,7 @@ export default class WritePost extends Component {
                           <label
                             className="custom-file-label"
                             htmlFor="inputGroupFile01"
+                            id="fileName"
                           >
                             Choose image
                           </label>
@@ -131,15 +148,7 @@ export default class WritePost extends Component {
                     </div>
                     <br />
                     <textarea
-                      onChange={(e) => {
-                        const newValue = e.target.value;
-                        if (!validator.isEmpty(newValue))
-                          e.target.classList.remove("is-invalid");
-
-                        this.setState({ postBody: newValue });
-                      }}
-                      required
-                      className="textarea writePost-item"
+                      className="textarea"
                       placeholder="Place some text here"
                       style={{
                         width: "100%",
