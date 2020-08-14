@@ -28,7 +28,7 @@ export default class WritePost extends Component {
       } else inputs[i].classList.remove("is-invalid");
     }
 
-    const postWrite = document.getElementsByClassName("note-editing-area")[0];
+    const postWrite = document.getElementsByClassName("note-editing-area")[0]
     this.setState((prev) => {
       return {
         ...prev,
