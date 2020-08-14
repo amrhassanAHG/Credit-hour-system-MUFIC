@@ -17,6 +17,7 @@ import EditMaterial from "../components/pages/EditMaterial/EditMaterial";
 import UploadMaterials from "../components/pages/UploadMaterials/UploadMaterials";
 import WritePost from "../components/pages/WritePost/WritePost";
 import ViewExcuses from "../components/pages/ViewExcuses/ViewExcuses";
+import AddMarks from '../components/pages/AddMarks/AddMarks'
 import Students from "../components/pages/Students/Students";
 import AddStudent from "../components/pages/AddStudent/AddStudent";
 import AdminCourses from "../components/pages/AdminCourses/AdminCourses";
@@ -122,6 +123,12 @@ const AppRouter = () => (
         exact={true}
       />
       <ProtectedRoute
+        role={lecturerRole}
+        path="/add-marks"
+        component={AddMarks}
+        exact={true}
+      />
+      <ProtectedRoute
         role={adminRole}
         path="/students"
         component={Students}
@@ -200,7 +207,7 @@ const AppRouter = () => (
         exact={true}
       />
       <Route path="/login" component={Login} exact={true} />
-      <Route path="/forget-password" component={ForgetPassword} exact={true} />
+      {/*<Route path="/forget-password" component={ForgetPassword} exact={true} />*/}
       <Route path="*" component={NotFound} />
     </Switch>
   </BrowserRouter>

@@ -238,7 +238,19 @@ export default class Sidebar extends Component {
                       <i className="nav-icon fa fa-glasses"></i>
                       <p>
                         View Excuses
-                        <span className="right badge badge-danger">New</span>
+                      </p>
+                    </NavLink>
+                  </li>
+
+                  <li className="nav-item">
+                    <NavLink
+                      to="/add-marks"
+                      activeClassName="active"
+                      className="nav-link"
+                    >
+                      <i className="nav-icon fa fa-glasses"></i>
+                      <p>
+                        Add Marks
                       </p>
                     </NavLink>
                   </li>

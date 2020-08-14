@@ -1,11 +1,34 @@
 import React, { Component } from "react";
 import { NavLink } from "react-router-dom";
+import userService from "../../../services/user.service";
 
 export default class UploadMaterialsBody extends Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {
+      title: "",
+      description: "",
+      file: null,
+    };
   }
+
+  onFileChange = (e) => {
+    const file = e.target.files[0];
+    document.getElementById("labelForFile").innerHTML =file.name;
+    this.setState({ file: file });
+  };
+
+  onLoadData = (e) => {
+    e.preventDefault();
+    userService.uploadFile("materials", this.state.file).then(
+      (response) => {
+        alert("File uploaded successfully");
+      },
+      (error) => {
+        alert("can't upload files");
+      }
+    );
+  };
 
   render() {
     return (
@@ -40,43 +63,6 @@ export default class UploadMaterialsBody extends Component {
               </div>
               <form role="form">
                 <div className="card-body">
-                  <div className="row">
-                    <div className="col-sm-2">
-                      {/* select */}
-                      <div className="form-group">
-                        <select className="form-control">
-                          <option>software</option>
-                          <option>computer language</option>
-                          <option>math</option>
-                          <option>DS</option>
-                          <option>GIS</option>
-                        </select>
-                      </div>
-                    </div>
-                    <div className="col-sm-2">
-                      {/* select */}
-                      <div className="form-group">
-                        <select className="form-control">
-                          <option>all</option>
-                          <option>cs</option>
-                          <option>is</option>
-                          <option>it</option>
-                          <option>or</option>
-                        </select>
-                      </div>
-                    </div>
-                    <div className="col-sm-2">
-                      {/* select */}
-                      <div className="form-group">
-                        <select className="form-control">
-                          <option>sec 1 </option>
-                          <option>sec 2</option>
-                          <option>sec 3</option>
-                          <option>sec 4</option>
-                        </select>
-                      </div>
-                    </div>
-                  </div>
                   {/* /.card-body */}
 
                   {/* Main content */}
@@ -86,6 +72,11 @@ export default class UploadMaterialsBody extends Component {
                       <div className="form-group">
                         <label htmlFor="exampleInputEmail1"> Title</label>
                         <input
+                          value={this.state.title}
+                          onChange={(e) => {
+                            const newValue = e.target.value;
+                            this.setState({ title: newValue });
+                          }}
                           type="text"
                           className="form-control"
                           id="title"
@@ -97,6 +88,11 @@ export default class UploadMaterialsBody extends Component {
                           Discription
                         </label>
                         <textarea
+                          value={this.state.description}
+                          onChange={(e) => {
+                            const newValue = e.target.value;
+                            this.setState({ description: newValue });
+                          }}
                           style={{ height: "100px" }}
                           className="form-control"
                           id="hint"
@@ -108,13 +104,15 @@ export default class UploadMaterialsBody extends Component {
                         <div className="input-group">
                           <div className="custom-file">
                             <input
+                              onChange={this.onFileChange}
                               type="file"
                               className="custom-file-input"
-                              id="exampleInputFile"
+                              id="fileInput"
                             />
                             <label
                               className="custom-file-label"
-                              htmlFor="exampleInputFile"
+                              htmlFor="fileInput"
+                              id="labelForFile"
                             >
                               Choose file
                             </label>
@@ -125,7 +123,11 @@ export default class UploadMaterialsBody extends Component {
                     {/* /.card-body */}
 
                     <div className="card-footer">
-                      <button type="submit" className="btn btn-primary">
+                      <button
+                        onClick={this.onLoadData}
+                        type="submit"
+                        className="btn btn-primary"
+                      >
                         Upload
                       </button>
                     </div>

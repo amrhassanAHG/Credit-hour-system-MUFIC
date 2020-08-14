@@ -111,7 +111,7 @@ export default class WritePost extends Component {
                         />
                       </div>
                       <div className="col">
-                        <div class="custom-file">
+                        <div className="custom-file">
                           <input
                             onChange={this.uploadImage}
                             type="file"
