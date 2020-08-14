@@ -5,11 +5,14 @@ import { DateRangePicker, SingleDatePicker } from "react-dates";
 import "react-dates/lib/css/_datepicker.css";
 import "react-dates/initialize";
 import moment from "moment";
+import userService from '../../../services/user.service'
 
 export default class AddTermBody extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      terms: [],
+
       termEnglishName: "",
       termArabicName: "",
       termType: "regular",
@@ -28,42 +31,84 @@ export default class AddTermBody extends Component {
 
       currentCourse: {
         code: "",
-        name: "",
-        doctor: "",
+        nameEnglish: "",
+        nameArabic: "",
       },
 
-      availableCourses: [
-        {
-          code:"BCS213",
-          nameEnglish: "Programming-2",
-          nameArabic: "برمجة – ٢",
-        },
-        {
-          code: "BCS241",
-          nameEnglish: "Operating Systems",
-          nameArabic: "نظم التشغیل",
-        },
-        {
-          code: "BCS214",
-          nameEnglish: "Data structures",
-          nameArabic: "ھیاكل بیانات",
-        },
-      ],
+      availableCourses: [],
 
       selectedCourses: [],
     };
   }
 
-  addTermData = (e) => {};
+  componentDidMount() {
+    userService.getData("courses").then(
+      (response) => {
+        const data = response.data.courses;
+        this.setState({ availableCourses: data });
+      },
+      (error) => {
+        this.setState({
+          availableCourses: [
+            {
+              code: "BCS213",
+              nameEnglish: "Programming-2",
+              nameArabic: "برمجة – ٢",
+            },
+            {
+              code: "BCS241",
+              nameEnglish: "Operating Systems",
+              nameArabic: "نظم التشغیل",
+            },
+            {
+              code: "BCS214",
+              nameEnglish: "Data structures",
+              nameArabic: "ھیاكل بیانات",
+            },
+          ],
+        });
+      }
+    );
+
+    const currentTerms = localStorage.getItem("terms");
+    if (currentTerms) this.setState({ terms: JSON.parse(currentTerms) });
+  }
+
+  addTermData = (e) => {
+    e.preventDefault();
+    const term = {
+      termEnglishName: this.state.termEnglishName,
+      termArabicName: this.state.termArabicName,
+      termType: this.state.termType,
+      termStartDate: this.state.termStartDate.format("L"),
+      termEndDate: this.state.termEndDate.format("L"),
+      registerStartDate: this.state.registerStartDate.format("L"),
+      registerEndDate: this.state.registerEndDate.format("L"),
+      editStartDate: this.state.editStartDate.format("L"),
+      editEndDate: this.state.editEndDate.format("L"),
+      selectedCourses: this.state.selectedCourses,
+    };
+
+    this.setState((prevState) => ({
+      terms: prevState.terms.concat(term),
+    }));
+
+    setTimeout(() => {
+      localStorage.setItem("terms", JSON.stringify(this.state.terms));
+      alert("Term added successfully");
+      window.location.reload();
+    }, 1);
+  };
 
   onSaveModalClick = (e) => {
     const section = document.getElementById("radioSuccess2");
     const newCourse = {
       code: this.state.currentCourse.code,
-      name: this.state.currentCourse.name,
-      doctor: this.state.currentCourse.doctor,
-      demonstratorName: document.getElementById("demonstatorName").value,
+      nameEnglish: this.state.currentCourse.nameEnglish,
+      nameArabic: this.state.currentCourse.nameArabic,
+      doctorName: document.getElementById("doctorName").value,
       type: "group",
+      groupData: {},
       sectionGroupsData: [],
     };
 
@@ -75,14 +120,20 @@ export default class AddTermBody extends Component {
       for (let i = 1; i <= sectionGroupsNumber; ++i) {
         const group = {
           groupNumber: `${i}`,
+          demonstratorName: document.getElementById(`demonstrator${i}`).value,
           day: document.getElementById(`select${i}`).value,
           time: document.getElementById(`time${i}`).value,
         };
         newCourse.sectionGroupsData.push(group);
       }
+    } else {
+      newCourse.type = "group";
+      newCourse.groupData = {
+        demonstratorName: document.getElementById("groupDemonstrator").value,
+        day: document.getElementById("groupSelect").value,
+        time: document.getElementById("groupTime").value,
+      };
     }
-
-    console.log(newCourse);
 
     const newSelectedCourses = this.state.selectedCourses.concat(newCourse);
     const newAvailableCourses = this.state.availableCourses.filter(
@@ -107,8 +158,8 @@ export default class AddTermBody extends Component {
     });
     const newAvailableCourses = this.state.availableCourses.concat({
       code: deletedCourse.code,
-      name: deletedCourse.name,
-      doctor: deletedCourse.doctor,
+      nameEnglish: deletedCourse.nameEnglish,
+      nameArabic: deletedCourse.nameArabic,
     });
     this.setState(() => ({
       selectedCourses: newSelectedCourses,
@@ -209,7 +260,6 @@ export default class AddTermBody extends Component {
               {/* /.col */}
               <div className="col-sm-6">
                 <ol className="breadcrumb float-sm-right">
-
                   <li className="breadcrumb-item">
                     <NavLink to="/terms">Terms</NavLink>
                   </li>
@@ -290,7 +340,7 @@ export default class AddTermBody extends Component {
                         <div className="icheck-success d-inline">
                           <input
                             onClick={() => {
-                              this.setState({ termType: "regular" });
+                              this.setState({ termType: "summer" });
                             }}
                             type="radio"
                             id="summerTerm"
@@ -304,7 +354,7 @@ export default class AddTermBody extends Component {
                           </label>
                         </div>
                       </div>
-
+                      {/*dates */}
                       <div className="form-group">
                         <label style={{ display: "block" }}>
                           Start and end date for the term:
@@ -455,8 +505,8 @@ export default class AddTermBody extends Component {
                       <thead>
                         <tr>
                           <th style={{ width: 10 }}>Code</th>
-                          <th>Course name</th>
-                          <th>Course Doctor</th>
+                          <th>Course English name</th>
+                          <th>Course Arabic name</th>
                           <th style={{ width: 40 }}>Remove</th>
                         </tr>
                       </thead>
@@ -464,15 +514,15 @@ export default class AddTermBody extends Component {
                         {this.state.selectedCourses.map((course) => (
                           <tr key={course.code}>
                             <td>{course.code}</td>
-                            <td>{course.name}</td>
-                            <td>{course.doctor}</td>
+                            <td>{course.nameEnglish}</td>
+                            <td>{course.nameArabic}</td>
                             <td>
                               <button
                                 className="btn btn-danger"
                                 name={course.code}
                                 onClick={this.onRemoveClick}
                               >
-                                x
+                                Delete
                               </button>
                             </td>
                           </tr>
@@ -574,7 +624,7 @@ export default class AddTermBody extends Component {
                         <div className="form-group" id="group-data">
                           <div>
                             <label
-                              class="text-secondary"
+                              className="text-secondary"
                               style={{ marginRight: "10px" }}
                             >
                               Demonstrator name:
@@ -589,7 +639,7 @@ export default class AddTermBody extends Component {
                               }}
                             ></input>
                             <label
-                              class="text-secondary"
+                              className="text-secondary"
                               style={{ marginRight: "10px" }}
                             >
                               day:
@@ -597,7 +647,7 @@ export default class AddTermBody extends Component {
                             <select
                               defaultValue="1"
                               id="groupSelect"
-                              class="font-weight-bold font-italic"
+                              className="font-weight-bold font-italic"
                               style={{
                                 marginRight: "20px",
                                 border: "1px solid #999",
@@ -613,7 +663,7 @@ export default class AddTermBody extends Component {
                               <option value="7">Friday</option>
                             </select>
                             <label
-                              class="text-secondary"
+                              className="text-secondary"
                               style={{ marginRight: "10px" }}
                             >
                               time:

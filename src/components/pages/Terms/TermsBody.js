@@ -1,42 +1,28 @@
 import React, { Component } from "react";
 import { NavLink } from "react-router-dom";
-import userService from "../../../services/user.service";
 
 export default class TermsBody extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      terms: [
-        {
-          id: 1,
-          nameArabic: "الترم الاول",
-          nameEnglish: "First term",
-          startDate: "1/10/2018",
-          endDate: "15/1/2019",
-        },
-        {
-          id: 2,
-          nameArabic: "الترم التاني",
-          nameEnglish: "Second term",
-          startDate: "23/2/2019",
-          endDate: "10/6/2019",
-        },
-      ],
+      terms: [],
     };
+  }
+
+  componentDidMount(){
+    const currentTerms = localStorage.getItem("terms");
+    if (currentTerms) this.setState({ terms: JSON.parse(currentTerms) });
   }
 
   onTermDelete = (e) => {
     const id = e.target.id;
-    const newTerms = this.state.terms.filter(term=>term.id!=id)
+    const newTerms = this.state.terms.filter((term, idx)=>idx.toString()!=id)
     this.setState({terms : newTerms})
-    userService.removeData(`terms/${id}`).then(
-      (response) => {
-        alert('Term deleted successfully');
-      },
-      (error) => {
-        alert('Term deleted successfully');  
-      }
-    );
+
+    setTimeout(()=>{
+      localStorage.setItem('terms', this.state.terms);
+      alert('Term deleted successfully');
+    },1);
   };
 
   render() {
@@ -94,16 +80,16 @@ export default class TermsBody extends Component {
                       </tr>
                     </thead>
                     <tbody>
-                      {this.state.terms.map((term) => (
-                        <tr key={term.id}>
-                          <td>{term.nameArabic}</td>
-                          <td>{term.nameEnglish}</td>
-                          <td>{term.startDate}</td>
-                          <td>{term.endDate}</td>
+                      {this.state.terms.map((term, index) => (
+                        <tr key={index}>
+                          <td>{term.termArabicName}</td>
+                          <td>{term.termEnglishName}</td>
+                          <td>{term.termStartDate}</td>
+                          <td>{term.termEndDate}</td>
                           <td>
-                            <div className="row- center  ">
+                            <div className="row- center">
                               <button
-                                id={term.id.toString()}
+                                id={index.toString()}
                                 onClick={this.onTermDelete}
                                 className="btn btn-danger"
                               >
