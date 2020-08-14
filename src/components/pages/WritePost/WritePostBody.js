@@ -26,14 +26,6 @@ export default class WritePost extends Component {
        } else inputs[i].classList.remove("is-invalid");
     }
 
-
-    /*for testing*/
-    // const postWrite = document.getElementsByClassName("note-editing-area")[0];
-    // if(validator.isEmpty(postWrite.innerText)){
-    //     isValid = false ;
-    //     postWrite.classList.add("is-invalid");
-    // } else postWrite.classList.remove("is-invalid");
-
     const postWrite = document.getElementsByClassName("note-editing-area")[0]
     this.setState((prev) => {
       return {
