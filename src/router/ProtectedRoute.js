@@ -17,7 +17,8 @@ export default class ProtectedRoute extends Component {
       <Route
         {...props}
         render={(props) => {
-          if (!this.state.userRole) {
+          return <Component {...props} />;
+          /*if (!this.state.userRole) {
             return <Redirect to="/login" />;
           } else if (
             role === this.state.userRole ||
@@ -26,7 +27,7 @@ export default class ProtectedRoute extends Component {
             return <Component {...props} />;
           } else {
             return <Redirect to="/write-post" />;
-          }
+          }*/
         }}
       />
     );

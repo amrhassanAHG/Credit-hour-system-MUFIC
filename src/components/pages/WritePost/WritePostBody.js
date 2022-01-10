@@ -8,7 +8,7 @@ export default class WritePost extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      userId: AuthService.getCurrentUser().id,
+      userId: "", /*AuthService.getCurrentUser().id*/
       title: "",
       imageLink: "",
       postBody: "",

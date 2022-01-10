@@ -37,7 +37,7 @@ import ForgetPassword from "../components/pages/ForgetPassword/ForgetPassword";
 const AppRouter = () => (
   <BrowserRouter>
     <Switch>
-      {/*<Route path="/" component={Home} exact={true} />
+      <Route path="/" component={Home} exact={true} />
       <ProtectedRoute
         role={studentRole}
         path="/registercourses"
@@ -91,13 +91,13 @@ const AppRouter = () => (
         path="/department"
         component={Department}
         exact={true}
-      />*/}
+      /> {/*
       <ProtectedRoute
         role={[lecturerRole, adminRole]}
         path="/"
         component={WritePost}
         exact={true}
-      />
+      />*/}
       <ProtectedRoute
         role={lecturerRole}
         path="/edit-material"
@@ -207,7 +207,7 @@ const AppRouter = () => (
         exact={true}
       />
       <Route path="/login" component={Login} exact={true} />
-      {/*<Route path="/forget-password" component={ForgetPassword} exact={true} />*/}
+      {<Route path="/forget-password" component={ForgetPassword} exact={true} />}
       <Route path="*" component={NotFound} />
     </Switch>
   </BrowserRouter>
