@@ -1,4 +1,4 @@
-A front-end project for credit hour systems in Menofia university to enroll courses, download materials and many other functions.
+A front-end project for credit hour systems in FCI Menofia university to enroll courses, download materials and many other functions.
 There are three roles (Admin, Teaching staff, Student) and each of them has specific functions.
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
