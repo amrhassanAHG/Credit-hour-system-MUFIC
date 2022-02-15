@@ -9,28 +9,23 @@ In the project directory, run this scripts to be able to use it:
 
 ### `npm install`
 
-install all dependencies.<br />
-
-### `npm serve`
-
-Runs Json server to deal with the data.<br />
+Install all dependencies.<br />
 
 ### `npm start`
 
 Runs the app in the development mode.<br />
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.<br />
 
+### Use The data below for Authentication
 
-## Additinal Scripts
+# For student role:
+username : student
+password : 123456
 
-### `npm test`
+# For Teaching-staff role:
+username : doctor
+password : 123456
 
-Launches the test runner in the interactive watch mode.<br />
-
-### `yarn build`
-
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
+# For admin role:
+username : admin
+password : 123456

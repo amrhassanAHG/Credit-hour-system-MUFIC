@@ -67,7 +67,7 @@ export default class Sidebar extends Component {
               role="menu"
               data-accordion="false"
             >
-              {true && (
+              {(this.state.role === studentRole) && (
                 <ul className="nav nav-pills nav-sidebar flex-column">
                   <li className="nav-item">
                     <NavLink
@@ -185,7 +185,7 @@ export default class Sidebar extends Component {
                 </ul>
               )}
 
-              {(this.state.role === lecturerRole||true) && (
+              {(this.state.role === lecturerRole) && (
                 <ul className="nav nav-pills nav-sidebar flex-column">
                   <li className="nav-item">
                     <NavLink
@@ -258,7 +258,7 @@ export default class Sidebar extends Component {
                 </ul>
               )}
 
-              {(this.state.role === adminRole||true) && (
+              {(this.state.role === adminRole) && (
                 <ul className="nav nav-pills nav-sidebar flex-column">
                   <li className="nav-item">
                     <NavLink

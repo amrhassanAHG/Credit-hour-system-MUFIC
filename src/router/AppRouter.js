@@ -37,75 +37,74 @@ import ForgetPassword from "../components/pages/ForgetPassword/ForgetPassword";
 const AppRouter = () => (
   <BrowserRouter>
     <Switch>
-      <Route path="/" component={Home} exact={true} />
       <ProtectedRoute
-        role={studentRole}
+        role={[]}
+        path="/"
+        component={Home}
+        exact={true}
+      />
+      <ProtectedRoute
+        role={[studentRole]}
         path="/registercourses"
         component={RegisterCourses}
         exact={true}
       />
       <ProtectedRoute
-        role={studentRole}
+        role={[studentRole]}
         path="/materials"
         component={Materials}
         exact={true}
       />
       <ProtectedRoute
-        role={studentRole}
+        role={[studentRole]}
         path="/courses"
         component={Courses}
         exact={true}
       />
       <ProtectedRoute
-        role={studentRole}
+        role={[studentRole]}
         path="/courses-info"
         component={CoursesInfo}
         exact={true}
       />
       <ProtectedRoute
-        role={studentRole}
+        role={[studentRole]}
         path="/first-semester-result"
         component={Result}
         exact={true}
       />
       <ProtectedRoute
-        role={studentRole}
+        role={[studentRole]}
         path="/second-semester-result"
         component={Result}
         exact={true}
       />
       <ProtectedRoute
-        role={studentRole}
+        role={[studentRole]}
         path="/summer-semester-result"
         component={Result}
         exact={true}
       />
       <ProtectedRoute
-        role={studentRole}
+        role={[studentRole]}
         path="/excuse"
         component={Excuse}
         exact={true}
       />
       <ProtectedRoute
-        role={studentRole}
+        role={[studentRole]}
         path="/department"
         component={Department}
         exact={true}
-      /> {/*
+      />
       <ProtectedRoute
-        role={[lecturerRole, adminRole]}
-        path="/"
-        component={WritePost}
-        exact={true}
-      />*/}
-      <ProtectedRoute
-        role={lecturerRole}
+        role={[lecturerRole]}
         path="/edit-material"
         component={EditMaterial}
         exact={true}
       />
       <ProtectedRoute
-        role={lecturerRole}
+        role={[lecturerRole]}
         path="/upload-materials"
         component={UploadMaterials}
         exact={true}
@@ -117,97 +116,97 @@ const AppRouter = () => (
         exact={true}
       />
       <ProtectedRoute
-        role={lecturerRole}
+        role={[lecturerRole]}
         path="/view-excuses"
         component={ViewExcuses}
         exact={true}
       />
       <ProtectedRoute
-        role={lecturerRole}
+        role={[lecturerRole]}
         path="/add-marks"
         component={AddMarks}
         exact={true}
       />
       <ProtectedRoute
-        role={adminRole}
+        role={[adminRole]}
         path="/students"
         component={Students}
         exact={true}
       />
       <ProtectedRoute
-        role={adminRole}
+        role={[adminRole]}
         path="/add-student"
         component={AddStudent}
         exact={true}
       />
       <ProtectedRoute
-        role={adminRole}
+        role={[adminRole]}
         path="/admin-courses"
         component={AdminCourses}
         exact={true}
       />
       <ProtectedRoute
-        role={adminRole}
+        role={[adminRole]}
         path="/courses-registered"
         component={CoursesRegistered}
         exact={true}
       />
       <ProtectedRoute
-        role={adminRole}
+        role={[adminRole]}
         path="/add-student-sheet"
         component={AddStudentSheet}
         exact={true}
       />
       <ProtectedRoute
-        role={adminRole}
+        role={[adminRole]}
         path="/add-student-manual"
         component={AddStudentManual}
         exact={true}
       />
       <ProtectedRoute
-        role={adminRole}
+        role={[adminRole]}
         path="/terms"
         component={Terms}
         exact={true}
       />
       <ProtectedRoute
-        role={adminRole}
+        role={[adminRole]}
         path="/add-term"
         component={AddTerm}
         exact={true}
       />
       <ProtectedRoute
-        role={adminRole}
+        role={[adminRole]}
         path="/payments"
         component={Payments}
         exact={true}
       />
       <ProtectedRoute
-        role={adminRole}
+        role={[adminRole]}
         path="/registration-provement"
         component={RegistrationProvement}
         exact={true}
       />
       <ProtectedRoute
-        role={adminRole}
+        role={[adminRole]}
         path="/add-course-manually"
         component={AddCourseManually}
         exact={true}
       />
       <ProtectedRoute
-        role={adminRole}
+        role={[adminRole]}
         path="/add-program-manually"
         component={AddProgramManually}
         exact={true}
       />
       <ProtectedRoute
-        role={adminRole}
+        role={[adminRole]}
         path="/provement"
         component={Provement}
         exact={true}
       />
       <Route path="/login" component={Login} exact={true} />
-      {<Route path="/forget-password" component={ForgetPassword} exact={true} />}
+      <Route path="/forget-password" component={ForgetPassword} exact={true} />
       <Route path="*" component={NotFound} />
     </Switch>
   </BrowserRouter>

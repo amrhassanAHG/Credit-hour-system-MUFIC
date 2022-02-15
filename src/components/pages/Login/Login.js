@@ -22,17 +22,14 @@ export default class Page extends Component {
     if (email === "" || pass === "") {
       message.innerHTML = "Please Enter your email and password";
     } else {
-      const userData = AuthService.login(email, pass, days).then(
-        (response) => {
-          if (response.accessToken) {
+      const userData = AuthService.login(email, pass, days).then((response) => {
+          if (response) {
             this.props.history.push("/");
             window.location.reload();
+          }else{
+            message.innerHTML = "your email or password might be wrong";
           }
-        },
-        (error) => {
-          message.innerHTML = "your email or password might be wrong";
-        }
-      );
+      });
     }
   };
 

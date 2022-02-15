@@ -2,26 +2,32 @@ import axios from "axios";
 import { serverURL } from "../staticData";
 import Cookies from 'js-cookie'
 
-const API_URL = `${serverURL}/api/auth/`;
+const API_URL = `${serverURL}/users`;
 
 class AuthService {
   constructor() {}
 
   login(username, password, days) {
     return axios
-      .post(API_URL + "signin", {
-        username,
-        password,
-      })
+      .get(API_URL)
       .then((response) => {
-        if (response.data.accessToken) {
-          Cookies.set("MuficUser", JSON.stringify(response.data), {
+        const users = response.data;
+        let curUser = undefined;
+        users.forEach(user => {
+          if(user.username === username && user.password === password){
+            curUser = user;
+          }
+        });
+        if(curUser){
+          Cookies.set("MuficUser", JSON.stringify(curUser), {
             expires: days,
           });
         }
-
-        return response.data;
-      })
+      
+        return curUser;
+      }).catch((error)=>{
+        return undefined;
+      });
   }
 
   logout() {
@@ -30,19 +36,12 @@ class AuthService {
 
   getCurrentUser() {
     const user = Cookies.get("MuficUser");
-    if(user)
-      return JSON.parse(user)
-    else
-      return undefined
+    return (user)? JSON.parse(user) : undefined;
   }
 
   getRole() {
     const user = this.getCurrentUser();
-    if (user) {
-      return user.roles.find((role) => role.includes("ROLE"));
-    } else {
-      return "";
-    }
+    return (user)? user.role : "";
   }
 }
 
