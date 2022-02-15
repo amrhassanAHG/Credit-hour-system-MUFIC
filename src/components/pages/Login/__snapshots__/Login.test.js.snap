@@ -1,0 +1,137 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Login Testing 1`] = `
+<div
+  className="login-page"
+>
+  <div
+    className="login-box"
+  >
+    <div
+      className="login-logo"
+    >
+      <a
+        href="/"
+      >
+        <b
+          style={
+            Object {
+              "color": "white",
+            }
+          }
+        >
+          MUFCI
+        </b>
+        <b
+          style={
+            Object {
+              "color": "white",
+            }
+          }
+        >
+          System
+        </b>
+      </a>
+    </div>
+    <div
+      className="card"
+    >
+      <div
+        className="card-body login-card-body"
+      >
+        <p
+          className="login-box-msg"
+        >
+          Sign in to start your session
+        </p>
+        <form
+          action="../../index3.html"
+          onSubmit={[Function]}
+        >
+          <div
+            className="input-group mb-3"
+          >
+            <input
+              className="form-control"
+              id="login-email"
+              placeholder="Email or username"
+              type="text"
+            />
+            <div
+              className="input-group-append"
+            >
+              <div
+                className="input-group-text"
+              >
+                <span
+                  className="fas fa-envelope"
+                />
+              </div>
+            </div>
+          </div>
+          <div
+            className="input-group mb-3"
+          >
+            <input
+              className="form-control"
+              id="login-password"
+              placeholder="Password"
+              type="password"
+            />
+            <div
+              className="input-group-append"
+            >
+              <div
+                className="input-group-text"
+              >
+                <span
+                  className="fas fa-lock"
+                />
+              </div>
+            </div>
+          </div>
+          <div
+            className="row"
+          >
+            <div
+              className="col-8"
+            >
+              <div
+                className="icheck-primary"
+              >
+                <input
+                  id="remember-me"
+                  type="checkbox"
+                />
+                <label
+                  htmlFor="remember-me"
+                >
+                  Remember Me
+                </label>
+              </div>
+            </div>
+            <div
+              className="col-4"
+            >
+              <button
+                className="btn btn-primary btn-block"
+                type="submit"
+              >
+                Sign In
+              </button>
+            </div>
+          </div>
+        </form>
+        <div
+          id="error-message"
+          style={
+            Object {
+              "color": "red",
+            }
+          }
+        />
+      </div>
+    </div>
+  </div>
+</div>
+`;

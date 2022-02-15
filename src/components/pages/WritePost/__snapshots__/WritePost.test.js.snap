@@ -1,0 +1,539 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Writing post body page Testing 1`] = `
+<div
+  className="content-wrapper"
+>
+  <div
+    className="content-header"
+  >
+    <div
+      className="container-fluid"
+    >
+      <div
+        className="row mb-2"
+      >
+        <div
+          className="col-sm-6"
+        >
+          <h1
+            className="m-0 text-dark"
+          >
+            Write post
+          </h1>
+        </div>
+        <div
+          className="col-sm-6"
+        >
+          <ol
+            className="breadcrumb float-sm-right"
+          >
+            <li
+              className="breadcrumb-item"
+            >
+              Write post
+            </li>
+          </ol>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div
+    className="content"
+  >
+    <div
+      className="container-fluid"
+    >
+      <div
+        className="card card-primary"
+      >
+        <div
+          className="card-header"
+        >
+          <h3
+            className="card-title"
+          >
+            Write Post
+          </h3>
+        </div>
+        <form
+          className="form form-group"
+          onSubmit={[Function]}
+          role="form"
+        >
+          <div
+            className="card-body"
+          >
+            <div
+              className="mb-3"
+            >
+              <div
+                className="row"
+              >
+                <div
+                  className="col"
+                >
+                  <input
+                    className="form-control writePost-item"
+                    onChange={[Function]}
+                    placeholder="Title"
+                    type="tel"
+                  />
+                </div>
+                <div
+                  className="col"
+                >
+                  <div
+                    className="custom-file"
+                  >
+                    <input
+                      accept=".jpg, .jpeg, .png"
+                      alt=""
+                      className="custom-file-input  writePost-item"
+                      id="inputGroupFile01"
+                      onChange={[Function]}
+                      type="file"
+                    />
+                    <label
+                      className="custom-file-label"
+                      htmlFor="inputGroupFile01"
+                      id="fileName"
+                    >
+                      Choose image
+                    </label>
+                  </div>
+                </div>
+              </div>
+              <br />
+              <textarea
+                className="textarea"
+                placeholder="Place some text here"
+                style={
+                  Object {
+                    "border": "1px solid #dddddd",
+                    "fontSize": "14px",
+                    "height": "200px",
+                    "lineHeight": "18px",
+                    "padding": "10px",
+                    "width": "100%",
+                  }
+                }
+              />
+            </div>
+          </div>
+          <div
+            className="card-footer"
+          >
+            <button
+              className="btn btn-primary"
+              type="submit"
+            >
+              Submit
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Writing post page Testing 1`] = `
+<div>
+  <div
+    className="wrapper"
+  >
+    <nav
+      className="main-header navbar navbar-expand navbar-white navbar-light"
+    >
+      <ul
+        className="navbar-nav"
+      >
+        <li
+          className="nav-item"
+        >
+          <a
+            className="nav-link"
+            data-widget="pushmenu"
+            href="#"
+            role="button"
+          >
+            <i
+              className="fas fa-bars"
+            />
+          </a>
+        </li>
+      </ul>
+      <ul
+        className="navbar-nav ml-auto"
+      >
+        <li
+          className="nav-item d-none d-sm-inline-block"
+        >
+          <a
+            className="nav-link"
+            href="/login"
+          >
+            Login
+          </a>
+        </li>
+        <li
+          className="nav-item"
+        >
+          <a
+            className="nav-link"
+            data-widget="pushmenu"
+            href="#"
+            role="button"
+          >
+            <i
+              className="fas fa-bars"
+            />
+          </a>
+        </li>
+      </ul>
+    </nav>
+    <div
+      className="main-sidebar sidebar-dark-primary elevation-4"
+    >
+      <div>
+        <a
+          className="brand-link"
+        >
+          <img
+            alt="AdminLTE Logo"
+            className="img-circle elevation-3"
+            height="60"
+            src="logo.jpg"
+            style={
+              Object {
+                "opacity": 0.8,
+              }
+            }
+            width="60"
+          />
+          <span
+            className="brand-text font-weight-dark"
+            style={
+              Object {
+                "marginLeft": "10px",
+              }
+            }
+          >
+            MUFIC
+          </span>
+        </a>
+        <div
+          className="sidebar"
+        >
+          <nav
+            className="mt-2"
+          >
+            <ul
+              className="nav nav-pills nav-sidebar flex-column"
+              data-accordion="false"
+              data-widget="treeview"
+              role="menu"
+            >
+              <li
+                className="nav-header"
+              />
+            </ul>
+          </nav>
+        </div>
+      </div>
+    </div>
+    <div
+      className="content-wrapper"
+    >
+      <div
+        className="content-header"
+      >
+        <div
+          className="container-fluid"
+        >
+          <div
+            className="row mb-2"
+          >
+            <div
+              className="col-sm-6"
+            >
+              <h1
+                className="m-0 text-dark"
+              >
+                Write post
+              </h1>
+            </div>
+            <div
+              className="col-sm-6"
+            >
+              <ol
+                className="breadcrumb float-sm-right"
+              >
+                <li
+                  className="breadcrumb-item"
+                >
+                  Write post
+                </li>
+              </ol>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div
+        className="content"
+      >
+        <div
+          className="container-fluid"
+        >
+          <div
+            className="card card-primary"
+          >
+            <div
+              className="card-header"
+            >
+              <h3
+                className="card-title"
+              >
+                Write Post
+              </h3>
+            </div>
+            <form
+              className="form form-group"
+              onSubmit={[Function]}
+              role="form"
+            >
+              <div
+                className="card-body"
+              >
+                <div
+                  className="mb-3"
+                >
+                  <div
+                    className="row"
+                  >
+                    <div
+                      className="col"
+                    >
+                      <input
+                        className="form-control writePost-item"
+                        onChange={[Function]}
+                        placeholder="Title"
+                        type="tel"
+                      />
+                    </div>
+                    <div
+                      className="col"
+                    >
+                      <div
+                        className="custom-file"
+                      >
+                        <input
+                          accept=".jpg, .jpeg, .png"
+                          alt=""
+                          className="custom-file-input  writePost-item"
+                          id="inputGroupFile01"
+                          onChange={[Function]}
+                          type="file"
+                        />
+                        <label
+                          className="custom-file-label"
+                          htmlFor="inputGroupFile01"
+                          id="fileName"
+                        >
+                          Choose image
+                        </label>
+                      </div>
+                    </div>
+                  </div>
+                  <br />
+                  <textarea
+                    className="textarea"
+                    placeholder="Place some text here"
+                    style={
+                      Object {
+                        "border": "1px solid #dddddd",
+                        "fontSize": "14px",
+                        "height": "200px",
+                        "lineHeight": "18px",
+                        "padding": "10px",
+                        "width": "100%",
+                      }
+                    }
+                  />
+                </div>
+              </div>
+              <div
+                className="card-footer"
+              >
+                <button
+                  className="btn btn-primary"
+                  type="submit"
+                >
+                  Submit
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <footer
+    className="main-footer"
+  >
+    <strong>
+      Copyright © 2020 
+      <a
+        href="/"
+      >
+        FCI Menofia University
+      </a>
+      .
+    </strong>
+    <div
+      className="float-right d-none d-sm-inline-block"
+    >
+      All rights reserved.
+    </div>
+  </footer>
+</div>
+`;
+
+exports[`Writing post page Testing 2`] = `
+<div
+  className="content-wrapper"
+>
+  <div
+    className="content-header"
+  >
+    <div
+      className="container-fluid"
+    >
+      <div
+        className="row mb-2"
+      >
+        <div
+          className="col-sm-6"
+        >
+          <h1
+            className="m-0 text-dark"
+          >
+            Write post
+          </h1>
+        </div>
+        <div
+          className="col-sm-6"
+        >
+          <ol
+            className="breadcrumb float-sm-right"
+          >
+            <li
+              className="breadcrumb-item"
+            >
+              Write post
+            </li>
+          </ol>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div
+    className="content"
+  >
+    <div
+      className="container-fluid"
+    >
+      <div
+        className="card card-primary"
+      >
+        <div
+          className="card-header"
+        >
+          <h3
+            className="card-title"
+          >
+            Write Post
+          </h3>
+        </div>
+        <form
+          className="form form-group"
+          onSubmit={[Function]}
+          role="form"
+        >
+          <div
+            className="card-body"
+          >
+            <div
+              className="mb-3"
+            >
+              <div
+                className="row"
+              >
+                <div
+                  className="col"
+                >
+                  <input
+                    className="form-control writePost-item"
+                    onChange={[Function]}
+                    placeholder="Title"
+                    type="tel"
+                  />
+                </div>
+                <div
+                  className="col"
+                >
+                  <div
+                    className="custom-file"
+                  >
+                    <input
+                      accept=".jpg, .jpeg, .png"
+                      alt=""
+                      className="custom-file-input  writePost-item"
+                      id="inputGroupFile01"
+                      onChange={[Function]}
+                      type="file"
+                    />
+                    <label
+                      className="custom-file-label"
+                      htmlFor="inputGroupFile01"
+                      id="fileName"
+                    >
+                      Choose image
+                    </label>
+                  </div>
+                </div>
+              </div>
+              <br />
+              <textarea
+                className="textarea"
+                placeholder="Place some text here"
+                style={
+                  Object {
+                    "border": "1px solid #dddddd",
+                    "fontSize": "14px",
+                    "height": "200px",
+                    "lineHeight": "18px",
+                    "padding": "10px",
+                    "width": "100%",
+                  }
+                }
+              />
+            </div>
+          </div>
+          <div
+            className="card-footer"
+          >
+            <button
+              className="btn btn-primary"
+              type="submit"
+            >
+              Submit
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+`;
