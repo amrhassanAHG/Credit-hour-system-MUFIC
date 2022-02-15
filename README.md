@@ -16,16 +16,16 @@ Install all dependencies.<br />
 Runs the app in the development mode.<br />
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.<br />
 
-### Use The data below for Authentication
+## Use The data below for Authentication
 
-# For student role:
-username : student
-password : 123456
+### For student role:
+username : student<br/>
+password : 123456<br/>
 
-# For Teaching-staff role:
-username : doctor
-password : 123456
+### For Teaching-staff role:
+username : doctor<br/>
+password : 123456<br/>
 
-# For admin role:
-username : admin
-password : 123456
+### For admin role:
+username : admin<br/>
+password : 123456<br/>
